@@ -1,0 +1,501 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.displayFlex{
+    display: flex;
+}
+.spaceBetween{
+    justify-content: space-between;
+}
+.flexColumn{
+    flex-direction: column;
+}
+.width-100{
+    width: 99%;
+}
+
+a{
+    text-decoration: none;
+    color: inherit; 
+}
+html{
+    max-width: 1920px;
+    max-height: 1080px;
+}
+
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: url('/bootcamp-6-assignment/assets/fonts/HelveticaNeue.ttc') format('truetype');
+}
+body{
+    position: relative;
+    background: #F9F9F9;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/* left side content  */
+.left-container{
+    width: 50%;
+}
+.left-side{
+    margin-left: 78px;
+    padding-right: 150px;
+    width: 99%;
+}
+
+/* Headline  */
+
+.header{
+    display: flex;
+}
+.leftward-arrow{
+    display: block;
+    padding: 42px 0px 0px 62px ;
+}
+.head-line{
+    display: flex;
+    height: 88px;
+    justify-content: space-between;
+    align-items: end;
+    width: 100%;
+    border-bottom: 1px solid #1A1A1A;
+}
+
+.head-line > *{
+    font-family: 'Helvetica Neue';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    
+    /* off black */
+    
+    color: #1A1A1A;
+    padding-bottom:12px ;
+}
+/* END OF Headline  */
+
+
+/* form field  */
+
+
+.personal-info{
+    width: 100%;
+    margin-top: 69px;
+}
+label{
+    font-family: 'Helvetica Neue';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 21px;
+
+    color: #000000;
+}
+.name-div,.lastname-div{
+    width: 47%;
+}
+.name-div > *:first-child {
+    margin-bottom: 8px;
+    height: 21px;
+}
+
+.name-div > *:nth-child(2) {
+    height: 48px;
+    margin-bottom: 8px;
+    background: #FFFFFF;
+    border: 1px solid #BCBCBC;
+    border-radius: 4px;
+}
+.name-div > *:nth-child(3) {
+    font-family: 'Helvetica Neue';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 21px;
+    color: #2E2E2E;
+    height: 21px;
+}
+.lastname-div > *:first-child {
+    margin-bottom: 8px;
+    height: 21px;
+}
+.lastname-div > *:nth-child(2) {
+    margin-bottom: 8px;
+    text-indent: 16px;
+    background: #FFFFFF;
+    border: 1px solid #BCBCBC;
+    border-radius: 4px;
+    height: 48px;
+
+}
+.lastname-div > *:nth-child(3) {
+    font-family: 'Helvetica Neue';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 21px;
+    color: #2E2E2E;
+    height: 21px;
+    
+}
+
+#fName::placeholder{
+    padding: 0px 13px 14x 16px;
+    font-family: 'Helvetica Neue';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+    color: rgba(0, 0, 0, 0.6);
+    height: 21px;
+    width: 339px;
+    border-radius: nullpx;
+
+}
+#lastName::placeholder{
+    padding: 0px 13px 14x 16px;
+    font-family: 'Helvetica Neue';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+    color: rgba(0, 0, 0, 0.6);
+    height: 21px;
+    width: 339px;
+    border-radius: nullpx;
+
+}
+/* პირადი ფოტოს ატვირთვა */
+
+.photoDiv{
+    margin-top: 54px;
+    
+}
+
+.photoLabel{
+    height: 22px;
+    width: 232px;
+    border-radius: nullpx;
+    font-family: Helvetica Neue;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
+
+}
+
+#uploadButton{
+    outline: none!important;
+    width: 117px!important;
+    height: 27px!important;
+    padding: 4px 19px 6px 19px!important;
+    font-family: 'Helvetica Neue'!important;
+    font-style: normal!important;
+    font-weight: 400!important;
+    font-size: 14px!important;
+    line-height: 17px!important;
+    color: #FFFFFF!important;
+    display: flex!important;
+    flex-direction: row!important;
+    justify-content: center!important;
+    align-items: center!important;
+    padding: 10px 10px 12px!important;
+    gap: 10px!important;
+    background: #0E80BF!important;
+    border-radius: 4px!important;
+    border: none!important;
+}
+
+.aboutMeDiv{
+    margin-top: 54px;
+}
+.aboutMeLabel  {
+    
+    margin-bottom: 8px!important;
+}
+
+#aboutMe{
+    height: 113px;
+    width:99%;
+    border-radius: 4px;
+    border: 1px solid #BCBCBC;
+    background: #FFFFFF;
+    padding: 13px 16px 69px 0px;
+    resize: none;
+}
+
+textarea::placeholder{
+    font-family: Helvetica Neue;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21px;
+    letter-spacing: 0em;
+    text-align: left;
+    
+
+}
+.mailDiv{
+    margin-top: 33px;
+
+}
+.mailDiv >:first-child{
+    margin-bottom: 8px;
+}
+.mailDiv >:nth-child(3){
+    margin-top: 8px;
+    width: 798px;
+    height: 21px;
+    font-family: 'Helvetica Neue';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 21px;
+    color: #2E2E2E;
+}
+#mail{
+    width:99%;
+    height: 48px;
+    background: #FFFFFF;
+    border: 1px solid #BCBCBC;
+    border-radius: 4px;
+}
+#mail::placeholder{
+    height: 21px;
+    padding: 13px 16px 14px 0px;
+    font-family: 'Helvetica Neue';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+    color: rgba(0, 0, 0, 0.6);
+}
+.phoneDiv{
+    margin-top: 29px;
+}
+.phoneDiv > :first-child{
+    height: 21px;
+    width: 798px;
+    border-radius: nullpx;
+    font-family: 'Helvetica Neue';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 21px;
+    color: #000000;
+    margin-bottom: 8px;
+}
+.phoneDiv > :nth-child(2){
+    width:99%;
+    height: 48px;
+    
+    background: #FFFFFF;
+    border: 1px solid #BCBCBC;
+    border-radius: 4px;
+    
+}
+.phoneDiv > :nth-child(2)::placeholder{
+    height: 21px;
+    font-family: 'Helvetica Neue';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+    color: rgba(0, 0, 0, 0.6);
+    padding: 13px 16px 14px 0px;
+}
+.phoneDiv > :nth-child(3){
+    width: 798px;
+    height: 21px;
+    
+    font-family: 'Helvetica Neue';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 21px;
+    color: #2E2E2E;
+    margin-top: 8px;
+}
+.submitDiv{
+    display: flex;
+    margin-top: 160px;
+    margin-bottom: 65px;
+    justify-content: flex-end;
+}
+.submitDiv button{
+    padding: 14px 35px;
+    gap: 20px;
+    width: 151px;
+    height: 48px;
+    background: #6B40E3;
+    border-radius: 4px;
+    border: none;
+    font-family: 'Helvetica Neue';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.08em;
+    color: #FFFFFF;
+}
+
+
+.inputStayling  {
+    font-family: 'Helvetica Neue';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+    color: #000000;
+    text-indent: 16px;
+}
+
+
+
+
+
+
+
+
+
+
+
+/**************************** right side output  *************************/
+
+
+
+.right-container{
+    width: 40%;
+}
+
+.ouput-info{
+    margin-top: 68px;
+}
+
+.ouput-info > :first-child{
+    margin-right: 0px;
+    font-family: Helvetica Neue;
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 42px;
+    letter-spacing: 0em;
+    height: 42px;
+    width: 400px;
+    color: #F93B1D;
+
+    
+}
+.ouput-info > :nth-child(2){
+    list-style: none;
+    padding: 17px 0px;
+}
+.ouput-info > :nth-child(2) li{
+    padding: 10px 0px;
+
+    font-family: 'Helvetica Neue';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+
+    /* off black */
+
+    color: #1A1A1A;
+}
+.ouput-info > :nth-child(2) > li:first-child::before  {
+    vertical-align: middle;
+    padding-right: 10px;
+    content: url(/bootcamp-6-assignment/assets/images/material-symbols_alternate-email.png);
+    
+    background-size: cover;
+}
+.ouput-info > :nth-child(2) > li:nth-child(2)::before  {
+    vertical-align: middle;
+    padding-right: 10px;
+    content: url(/bootcamp-6-assignment/assets/images/Group.png);
+    
+    background-size: cover;
+}
+.ouput-info h4 {
+    margin-top: 34px;
+    margin-bottom: 15px;
+    font-family: 'Helvetica Neue';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    color: #F93B1D;
+}
+
+.ouput-info p {
+    font-family: 'Helvetica Neue';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    text-transform: lowercase;
+    color: #000000;
+}
+.output-photo{
+    margin-top: 48px;
+    margin-right: 75px;
+}
+.output-photo img {
+    width: 246px;
+    height: 246px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.end-star{
+    position: absolute;
+    bottom: 4%;
+    right: 37%;
+}
+
+
+
+
+
+/* VALIDATION STYLING */
+
+.hide{
+    visibility: hidden;
+}
+.visible{
+    visibility: visible;
+}
+.borderColorRed{
+    border: 1px solid #EF5050!important;
+}
+.labelColorRed{
+    color: #E52F2F!important;
+}
+.borderColorGreen{
+    border: 1px solid #98E37E
+}
+.iconGreen{
+    background-image: url(/bootcamp-6-assignment/assets/images/Vector.png)!important;
+    background-repeat: no-repeat!important;
+    background-position:99% 50%!important;
+}
+.relative{
+    position: relative;
+}
+.invalid {
+    position: absolute;
+    left: 101%;
+    top:36%;
+    background-image: url(/bootcamp-6-assignment/assets/images/Vector\ \(1\).png);
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+}
+
