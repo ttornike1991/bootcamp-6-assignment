@@ -90,7 +90,7 @@ label {
   font-weight: 700;
   font-size: 16px;
   line-height: 21px;
-
+width: 70%!important;
   color: #000000;
 }
 .name-div,
@@ -172,7 +172,7 @@ label {
 
 .photoLabel {
   height: 22px;
-  width: 232px;
+  width: 70%;
   border-radius: nullpx;
   font-family: Helvetica Neue;
   font-size: 18px;
@@ -240,6 +240,9 @@ textarea::placeholder {
 }
 .mailDiv {
   margin-top: 33px;
+}
+h6{
+  width: 70%!important;
 }
 .mailDiv > :first-child {
   margin-bottom: 8px;
@@ -353,24 +356,30 @@ textarea::placeholder {
 /**************************** right side output  *************************/
 
 .right-container {
-  width: 40%;
+  width: 50%;
 }
 
 .ouput-info {
   margin-top: 68px;
 }
-
-.ouput-info > :first-child > * {
-  margin-right: 0px;
+.ouput-info > :first-child{
+  width:400px;
+  
+}
+.fName,.lastName {
+  margin-right: 20px;
   font-family: Helvetica Neue;
   font-size: 34px;
   font-weight: 700;
   line-height: 42px;
   letter-spacing: 0em;
   height: 42px;
-  width: 400px;
+  width: auto;
+   
   color: #f93b1d;
+  text-align: start;
 }
+ 
 .ouput-info > :nth-child(2) {
   list-style: none;
   padding: 17px 0px;
@@ -422,11 +431,14 @@ textarea::placeholder {
   text-transform: lowercase;
   color: #000000;
 }
-.output-photo {
-  margin-top: 48px;
-  margin-right: 75px;
-}
+ .output-photo  {
+  position: absolute;
+  right:2%;
+ }
 .output-photo img {
+  margin-top: 48px;
+  margin-right: 15px;
+ 
   width: 246px;
   height: 246px;
   object-fit: cover;

@@ -41,6 +41,7 @@ if (window.location.pathname === "/personal.html") {
         e.target.nextElementSibling.nextElementSibling.classList.remove("visible");
         e.target.classList.add("iconGreen");
         e.target.classList.add("borderColorGreen");
+        return true
       }
     } else if (e.target.id === "lastName") {
       lastName = e.target.value.trim();
@@ -104,7 +105,26 @@ if (window.location.pathname === "/personal.html") {
         e.target.classList.add("iconGreen");
       }
     }
+   
   });
+  /// pass hidden photoupload element validation problems 1.1
+
+    if (localStorage.getItem("image") === null) {
+      document.getElementById("uploadButton").required = true;
+    } 
+  
+    form.addEventListener('submit', (e) =>{
+      e.preventDefault()
+      let data;
+      fetchData().then(result => {
+        data = result;
+        console.log(data, "Success");
+      });
+    
+       
+    })
+     
+
 }
 //  ******************************** //
 
@@ -157,7 +177,6 @@ function dataGenerator() {
       }
     }
   }
-  console.log(formData.get("name"));
 }
 
 // **************************************  //
@@ -166,7 +185,7 @@ function dataGenerator() {
 
 function fetchData() {
   dataGenerator();
-  fetch("https://resume.redberryinternship.ge/api/cvs", {
+  return fetch("https://resume.redberryinternship.ge/api/cvs", {
     headers: {
       Accept: "application/json",
     },
@@ -174,14 +193,17 @@ function fetchData() {
     body: formData,
   })
     .then((res) => res.json())
-    .then((date) => {
-      console.log(date);
-      return date;
+    .then((data) => {
+      console.log(data);
+      return Promise.resolve(data);
     })
     .catch((err) => console.log(err));
 }
-
 // **************************** //
+
+
+/// SAVE TO LOCAL STORAGE
+
 form.addEventListener("change", function (e) {
   e.preventDefault();
   if (e.target.id === "fName" && e.target.value) {
@@ -195,9 +217,14 @@ form.addEventListener("change", function (e) {
     localStorage.setItem("surname", lastName);
     console.log(lastName);
   } else if (e.target.id === "uploadButton" && e.target.value) {
+     
+    // Retrieve the uploaded photo from local storage
+
     let reader = new FileReader();
     reader.onload = function () {
       localStorage.setItem("image", reader.result);
+       
+      console.log(e.target.value);
       imagePreview.src = reader.result;
     };
     reader.readAsDataURL(e.target.files[0]);
@@ -222,30 +249,49 @@ form.addEventListener("change", function (e) {
   }
 });
 
+//*********************************************** */
+
+
+
+
+// Relload Handler
+
 window.addEventListener("load", function () {
   uName = localStorage.getItem("name");
   if (uName) {
     document.getElementById("fName").value = uName;
-    formData.delete("name");
+    document.querySelector(".fName").classList.remove('hide')
+    const updatedValue = uName.slice(0, 9);
+   document.querySelector(".fName").innerText= updatedValue 
     formData.append("name", uName);
   }
 
   lastName = localStorage.getItem("surname");
   if (lastName) {
     document.getElementById("lastName").value = lastName;
+    document.querySelector(".lastName").classList.remove('hide')
+    const updatedValue = lastName.slice(0, 16);
+   document.querySelector(".lastName").innerText= updatedValue 
     formData.append("surname", lastName);
   }
 
   aboutMe = localStorage.getItem("about_me");
   if (aboutMe) {
     document.getElementById("aboutMe").value = aboutMe;
+    document.querySelector(".aboutMes").classList.remove('hide')
+    document.querySelector(".aboutMe").classList.remove('hide')
+   document.querySelector(".aboutMes").innerText= aboutMe 
     formData.append("about_me", aboutMe);
   }
   let imageData = localStorage.getItem("image");
   if (imageData) {
     let blob = dataURLtoBlob(imageData);
     formData.append("image", blob, "image.png");
+     
     imagePreview.src = imageData;
+
+    /// pass hidden photoupload element validation problems  #1.2
+    document.getElementById("uploadButton").required = false;
   }
 
   function dataURLtoBlob(dataURL) {
@@ -265,17 +311,123 @@ window.addEventListener("load", function () {
   email = localStorage.getItem("email");
   if (email) {
     document.getElementById("mail").value = email;
+    document.querySelector(".mail").classList.remove('hide')
+   document.querySelector(".mail").innerText= email 
+    document.getElementsByClassName(".mail").value= email
+    
     formData.set("email", email);
   }
 
   phone = localStorage.getItem("phone_number");
   if (phone) {
     document.getElementById("phone").value = phone;
+    document.querySelector(".phone").classList.remove('hide')
+   document.querySelector(".phone").innerText= phone 
+    document.getElementsByClassName(".phone").value= phone
     formData.set("phone_number", phone);
   }
+   
+   
   for (let [key, value] of formData.entries()) {
     console.log(key + ": " + value, "sasa");
   }
   fetchData();
 });
-// localStorage.clear();
+ 
+
+// liveStrem to the right side
+
+
+form.addEventListener('input', function(e){
+  e.preventDefault()
+
+  if (e.target.id === "fName")  {
+    const liveText = document.getElementById("fName").value.trim();
+    const updatedValue = liveText.slice(0, 9);
+     
+    const liveName = document.querySelector(".fName");
+    liveName.classList.remove('hide')
+    liveName.innerText = updatedValue;
+    console.log(liveName)
+
+  }
+  else if (e.target.id === "lastName") {
+    const liveText = document.getElementById("lastName").value.trim();
+    const updatedValue = liveText.slice(0, 16);
+
+    const liveName = document.querySelector(".lastName");
+    liveName.classList.remove('hide')
+    liveName.innerText = updatedValue;
+    console.log(liveName);
+  }
+  else if (e.target.id === "mail") {
+    const liveText = document.getElementById("mail").value.trim();
+    const liveName = document.querySelector(".mail");
+    liveName.classList.remove('hide')
+    liveName.innerText = liveText;
+    console.log(liveName);
+  }
+  else if (e.target.id === "phone") {
+    const liveText = document.getElementById("phone").value.trim();
+    const liveName = document.querySelector(".phone");
+    liveName.classList.remove('hide')
+    liveName.innerText = liveText;
+    console.log(liveName);
+  }
+  else if (e.target.id === "aboutMe") {
+    const liveText = document.getElementById("aboutMe").value.trim();
+    const liveName = document.querySelector(".aboutMes");
+    const aboutmeTitle = document.querySelector(".aboutMe");
+    aboutmeTitle.classList.remove('hide')
+    liveName.classList.remove('hide')
+    liveName.innerText = liveText;
+    console.log(liveName);
+    
+  }
+  
+})
+// ************************//
+
+
+form.addEventListener('change', function (e){
+  
+  if ((e.target.id === "fName") && (!e.target.value)){
+    const liveName = document.querySelector(".fName");
+    liveName.classList.add('hide')
+    liveName.innerText = "" ;
+    console.log("ააააააააააააააააააააააააააააააააააა")
+
+  }
+  else if ((e.target.id === "lastName")  && (!e.target.value)) { 
+    const liveName = document.querySelector(".lastName");
+    liveName.classList.add('hide')
+    liveName.innerText = "";
+    console.log(liveName);
+  }
+  else if ((e.target.id === "mail")  && (!e.target.value)) {
+    
+    const liveName = document.querySelector(".mail");
+    liveName.classList.add('hide')
+    liveName.innerText = "";
+    console.log(liveName);
+  }
+  else if ((e.target.id === "phone")  && (!e.target.value.trim())) {
+    
+    const liveName = document.querySelector(".phone");
+    liveName.classList.add('hide')
+    liveName.innerText = "";
+    console.log(liveName);
+  }
+  else if ((e.target.id === "aboutMe")   && (e.target.value.trim() === "")){
+    console.log("Adad",e.target.value,"shevedi")
+    
+    const liveName = document.querySelector(".aboutMes");
+    const aboutmeTitle = document.querySelector(".aboutMe");
+    aboutmeTitle.classList.add('hide')
+    liveName.classList.add('hide')
+    liveName.innerText = "";
+    console.log(liveName);
+  }
+ 
+})
+
