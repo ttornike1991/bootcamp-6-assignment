@@ -556,17 +556,8 @@ h6 {
   line-height: 22px;
 
   color: #000000;
-  width: 400px;
+  width: 600px;
   margin-top: 14px;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  
-}
-.borderTOP{
-  margin-top: 30px;
-  margin-bottom: 20px;
-  width: 250px;
-  border-top: 2px dotted  #c8c8c8;
 }
 
 /* VALIDATION STYLING */

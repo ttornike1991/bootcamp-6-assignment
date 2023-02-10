@@ -30,7 +30,7 @@
             <div class="form-container" id="form-container">
               <form
                 action=""
-                class="experience-info-form"
+                class="experience-info-form newForm0"
                 id="form-personal-info2"
               >
                 <div
@@ -40,7 +40,7 @@
                   <input
                     class="inputStayling position-class"
                     type="text"
-                    id="position"
+                    id="position0"
                     placeholder="დეველოპერი, დიზაინერი, ა.შ."
                     required
                   />
@@ -54,7 +54,7 @@
                   <input
                     class="inputStayling"
                     type="text"
-                    id="employee"
+                    id="employee0"
                     placeholder="დამსაქმებელი"
                     required
                   />
@@ -67,7 +67,7 @@
                     <input
                       class="inputStayling paddingRight"
                       type="date"
-                      id="startData"
+                      id="startData0"
                       name="trip-start"
                       required
                     />
@@ -79,7 +79,7 @@
                     <input
                       class="inputStayling paddingRight"
                       type="date"
-                      id="endData"
+                      id="endData0"
                       name="trip-start"
                       required
                     />
@@ -91,7 +91,7 @@
                   <label class="aboutMeLabel" for="description">აღწერა</label>
                   <textarea
                     class="inputStayling descriptionClass"
-                    id="description"
+                    id="description0"
                     placeholder="როლი თანამდებობაზე და ზოგადი აღწერა"
                     required
                   ></textarea>
@@ -104,15 +104,15 @@
                   >
                 </div>
                 <button
-                  id="submit2"
-                  class="absolutePosition"
+                  id="submit0"
+                  class="absolutePosition hiddenButton"
                   type="submit"
                 ></button>
               </form>
             </div>
             <div class="submitDivExperience displayFlex">
               <a href="/personal.html" id="back">უკან</a>
-              <a id="submitExperience">შემდეგი</a>
+              <a href="/education.html" id="submitExperience">შემდეგი</a>
             </div>
           </section>
         </div>
@@ -143,23 +143,26 @@
       <div class="end-star">
         <img src="./assets/images/LOGO-12 1.png" alt="" />
       </div>
-      <div class="experience-output-div">
-        <h2 class="experience-output marginBottom">გამოცდილება</h2>
-        <div class="displayFlex">
-          <h4 class="position-output marginBottom8px">
-            React Native Developer,
-          </h4>
-          <h4 class="employee-output">Microsoft</h4>
+      <div class="experience-output-div " id="getOUTER">
+        <h2 class="hide experience-output marginBottom">გამოცდილება</h2>
+        <div id="newForm0">
+          <div class="displayFlex">
+            <h4 class="hide position-output marginBottom8px position0" name="position0">
+              React Native Developer,
+            </h4>
+            <h4 class="hide employee-output employee0" name="employee0" >Microsoft</h4>
+          </div>
+          <div class="displayFlex data-output">
+            <h5 class="hide startData-output startData0" name="startData0">2020-09-23</h5>
+            <h5 class="hide justHypen">-</h5>
+            <h5 class="hide endData-output endData0" name="endData0">2020-09-23</h5>
+          </div>
+          <div class="hide description-output description0" name="description0">
+            Experienced Javascript Native Developer with 5 years in the
+            industry. proficient withreact.
+          </div>
         </div>
-        <div class="displayFlex data-output">
-          <h5 class="startData-output">2020-09-23</h5>
-          <h5 class="justHypen">-</h5>
-          <h5 class="endData-output">2020-09-23</h5>
-        </div>
-        <div class="description-output">
-          Experienced Javascript Native Developer with 5 years in the industry.
-          proficient withreact.
-        </div>
+        
       </div>
     </div>
     <script src="/assets/app.js"></script>

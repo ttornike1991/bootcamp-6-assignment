@@ -5,7 +5,6 @@ const imageInput = document.getElementById("uploadButton");
 const imagePreview = document.getElementById("imagePreview");
 const formDiv = document.getElementById("form-container");
 const form2Container = document.getElementById("experience-info");
-console.log(form2Container);
 document.querySelector(".leftward-arrow").addEventListener("click", () => {
   localStorage.clear();
   console.log(localStorage);
@@ -30,6 +29,7 @@ if (window.location.pathname === "/personal.html") {
   form.addEventListener("change", function (e) {
     e.preventDefault();
     let firstName, lastName, email, mobile;
+    aboutMe;
     if (e.target.id === "fName") {
       firstName = e.target.value.trim();
       let GeorgianChars = /^[\u10A0-\u10FF]+$/;
@@ -45,9 +45,13 @@ if (window.location.pathname === "/personal.html") {
         e.target.nextElementSibling.nextElementSibling.classList.add("visible");
         let defaultValue = "";
         e.target.value = defaultValue;
+        localStorage.setItem(`name`, "");
         console.log("saxeli arasworia");
         return;
       } else {
+        firstName = e.target.value;
+
+        localStorage.setItem("name", firstName);
         e.target.classList.remove("borderColorRed");
         e.target.previousElementSibling.classList.remove("labelColorRed");
         e.target.nextElementSibling.nextElementSibling.classList.remove(
@@ -68,9 +72,11 @@ if (window.location.pathname === "/personal.html") {
         e.target.nextElementSibling.nextElementSibling.classList.add("visible");
         let defaultValue = "";
         e.target.value = defaultValue;
+        localStorage.setItem(`surname`, "");
         console.log("gvari arasworia");
         return;
       } else {
+        localStorage.setItem("surname", lastName);
         e.target.previousElementSibling.classList.remove("labelColorRed");
         e.target.classList.remove("borderColorRed");
         e.target.nextElementSibling.nextElementSibling.classList.remove(
@@ -90,9 +96,11 @@ if (window.location.pathname === "/personal.html") {
         e.target.nextElementSibling.nextElementSibling.classList.add("visible");
         let defaultValue = "";
         e.target.value = defaultValue;
+        localStorage.setItem(`email`, "");
         console.log("email is invalid");
         return;
       } else {
+        localStorage.setItem("email", email);
         e.target.previousElementSibling.classList.remove("labelColorRed");
         e.target.classList.remove("borderColorRed");
         e.target.nextElementSibling.nextElementSibling.classList.remove(
@@ -113,9 +121,12 @@ if (window.location.pathname === "/personal.html") {
         e.target.nextElementSibling.nextElementSibling.classList.add("visible");
         let defaultValue = "";
         e.target.value = defaultValue;
+        localStorage.setItem(`phone_number`, "");
+
         console.log("mobile number is invalid");
         return;
       } else {
+        localStorage.setItem("phone_number", mobile);
         e.target.previousElementSibling.classList.remove("labelColorRed");
         e.target.classList.remove("borderColorRed");
         e.target.nextElementSibling.nextElementSibling.classList.remove(
@@ -124,6 +135,27 @@ if (window.location.pathname === "/personal.html") {
         e.target.classList.add("borderColorGreen");
         e.target.classList.add("iconGreen");
       }
+    } else if (e.target.id === "aboutMe") {
+      aboutMe = e.target.value.trim();
+      if (!aboutMe) {
+        let defaultValue = "";
+        e.target.value = defaultValue;
+        localStorage.setItem(`about_me`, "");
+      } else {
+        localStorage.setItem("about_me", aboutMe);
+      }
+    } else if (e.target.id === "uploadButton") {
+      let reader = new FileReader();
+      reader.onload = function () {
+        localStorage.setItem("image", reader.result);
+
+        console.log(e.target.value);
+        imagePreview.src = reader.result;
+      };
+      reader.readAsDataURL(e.target.files[0]);
+
+      dataGenerator();
+      console.log(e.target.value);
     }
   });
 
@@ -149,21 +181,25 @@ if (window.location.pathname === "/personal.html") {
 //*****************//
 //*experience.html*//
 //*****************//
-let count = 1;
-localStorage.setItem("count", count);
 
 if (window.location.pathname === "/experience.html") {
-  let formCount = localStorage.getItem("count");
-  formCount = parseInt(formCount);
   formDiv.addEventListener("click", function (e) {
+    let formCount = localStorage.getItem("count");
+    if (formCount === null || formCount === undefined || isNaN(formCount)) {
+      formCount = 0;
+    } else {
+      formCount = parseInt(formCount);
+    }
+    formCount++;
+    localStorage.setItem("count", formCount);
     if (e.target.classList.contains("add-form")) {
       (function () {
         let newForm = document.createElement("div");
 
         newForm.innerHTML = `<form
     action=""
-    class="experience-info-form"
-    id="form-personal-info${formCount}"
+    class="experience-info-form newForm${formCount}"
+    id="form-personal-info "
   >
     <div
       class="displayFlex flexColumn position-div relative marginBottom"
@@ -232,141 +268,215 @@ if (window.location.pathname === "/experience.html") {
     </div>
   
     <div class="add-form-div">
-      <a class="add-form" id="add-form${formCount}">მეტი გამოცდილების დამატება</a>
+      <a class="add-form" id="add-form">მეტი გამოცდილების დამატება</a>
     </div>
-    <button id="submit2" type="submit" class="absolutePosition"></button>
+    <button id="submit" type="submit" class="absolutePosition hiddenButton"></button>
   </form>`;
-        document.getElementById("form-container").appendChild(newForm);
-      })();
 
-      formCount++;
-      localStorage.setItem("count", formCount);
-      console.log(count, formCount, localStorage.getItem("count"));
+        let outputform = document.createElement("div");
+
+        outputform.innerHTML = `<div  id="OnewForm${formCount}">
+    <div class="borderTOP"></div>
+    <div class="displayFlex">
+      <h4 class="hide position-output marginBottom8px position${formCount}">
+        React Native Developer,
+      </h4>
+      <h4 class="hide employee-output employee${formCount}">Microsoft</h4>
+    </div>
+    <div class="displayFlex data-output">
+      <h5 class="hide startData-output startData${formCount}">2020-09-23</h5>
+      <h5 class="hide justHypen">-</h5>
+      <h5 class="hide endData-output endData${formCount}">2020-09-23</h5>
+    </div>
+    <div class="hide description-output description${formCount}">
+      Experienced Javascript Native Developer with 5 years in the
+      industry. proficient withreact.
+    </div>
+  </div>`;
+        localStorage.setItem(`newForm${formCount}`, newForm.innerHTML);
+        localStorage.setItem(`OnewForm${formCount}`, outputform.innerHTML);
+        document.getElementById("form-container").appendChild(newForm);
+        document.getElementById("getOUTER").appendChild(outputform);
+      })();
+      console.log(formCount);
+
+      console.log(localStorage);
     }
   });
 
-  console.log(formCount, localStorage);
+  // dynamicaly adding forms and checking emptycase
+
+  document
+    .getElementById("submitExperience")
+    .addEventListener("click", function (e) {
+      e.preventDefault();
+
+      var forms = document.getElementsByClassName("experience-info-form");
+      for (var i = 0; i < forms.length; i++) {
+        var formElements = forms[i].elements;
+        var formHasValues = false;
+
+        for (var j = 0; j < formElements.length; j++) {
+          if (formElements[j].value.trim() !== "") {
+            formHasValues = true;
+          }
+        }
+
+        if (!formHasValues && i !== 0) {
+          console.log("Form is empty, skipping validation.");
+          continue;
+        }
+
+        if (!forms[i].checkValidity()) {
+          forms[i].reportValidity();
+        } else {
+          forms[i].click();
+          console.log("Form is valid, submitting...");
+        }
+      }
+    });
 
   form2Container.addEventListener("change", function (e) {
     e.preventDefault();
-    let position, employee, startData, endData, description;
-    if (e.target.id === "position") {
-      position = e.target.value.trim();
-      if (!position || position.length < 2) {
-        e.target.classList.remove("iconGreen");
-        e.target.classList.remove("borderColorGreen");
-        e.target.classList.add("borderColorRed");
-        e.target.previousElementSibling.classList.add("labelColorRed");
-        e.target.nextElementSibling.nextElementSibling.classList.add("visible");
-        let defaultValue = "";
-        e.target.value = defaultValue;
-        console.log("Tanamdeboba carielia ");
-        return;
-      } else {
-        e.target.classList.remove("borderColorRed");
-        e.target.previousElementSibling.classList.remove("labelColorRed");
-        e.target.nextElementSibling.nextElementSibling.classList.remove(
-          "visible"
-        );
-        e.target.classList.add("iconGreen");
-        e.target.classList.add("borderColorGreen");
-        return;
-      }
-    } else if (e.target.id === "employee") {
-      employee = e.target.value.trim();
-      if (!employee || employee.length < 2) {
-        e.target.classList.remove("iconGreen");
-        e.target.classList.remove("borderColorGreen");
-        e.target.classList.add("borderColorRed");
-        e.target.previousElementSibling.classList.add("labelColorRed");
-        e.target.nextElementSibling.nextElementSibling.classList.add("visible");
-        let defaultValue = "";
-        e.target.value = defaultValue;
-        console.log("position carielia ");
-        return;
-      } else {
-        e.target.classList.remove("borderColorRed");
-        e.target.previousElementSibling.classList.remove("labelColorRed");
-        e.target.nextElementSibling.nextElementSibling.classList.remove(
-          "visible"
-        );
-        e.target.classList.add("iconGreen");
-        e.target.classList.add("borderColorGreen");
-        return;
-      }
-    } else if (e.target.id === "startData") {
-      console.log("print");
-      startData = e.target.value.trim();
+    let formCount = localStorage.getItem("count");
+    formCount = parseInt(formCount);
+    for (let i = 0; i <= formCount; i++) {
+      let position, employee, startData, endData, description;
+      if (e.target.id === `position${i}`) {
+        position = e.target.value.trim();
+        if (!position || position.length < 2) {
+          e.target.classList.remove("iconGreen");
+          e.target.classList.remove("borderColorGreen");
+          e.target.classList.add("borderColorRed");
+          e.target.previousElementSibling.classList.add("labelColorRed");
+          e.target.nextElementSibling.nextElementSibling.classList.add(
+            "visible"
+          );
+          let defaultValue = "";
+          e.target.value = defaultValue;
+          localStorage.setItem(`position${i}`, "");
+          console.log("Tanamdeboba carielia ");
+          return;
+        } else {
+          e.target.classList.remove("borderColorRed");
+          e.target.previousElementSibling.classList.remove("labelColorRed");
+          e.target.nextElementSibling.nextElementSibling.classList.remove(
+            "visible"
+          );
+          e.target.classList.add("iconGreen");
+          e.target.classList.add("borderColorGreen");
+          localStorage.setItem(`position${i}`, position);
+          return;
+        }
+      } else if (e.target.id === `employee${i}`) {
+        employee = e.target.value.trim();
+        if (!employee || employee.length < 2) {
+          e.target.classList.remove("iconGreen");
+          e.target.classList.remove("borderColorGreen");
+          e.target.classList.add("borderColorRed");
+          e.target.previousElementSibling.classList.add("labelColorRed");
+          e.target.nextElementSibling.nextElementSibling.classList.add(
+            "visible"
+          );
+          let defaultValue = "";
+          e.target.value = defaultValue;
+          localStorage.setItem(`employee${i}`, "");
+          console.log("position carielia ");
+          return;
+        } else {
+          e.target.classList.remove("borderColorRed");
+          e.target.previousElementSibling.classList.remove("labelColorRed");
+          e.target.nextElementSibling.nextElementSibling.classList.remove(
+            "visible"
+          );
+          e.target.classList.add("iconGreen");
+          e.target.classList.add("borderColorGreen");
+          localStorage.setItem(`employee${i}`, employee);
+          return;
+        }
+      } else if (e.target.id === `startData${i}`) {
+        console.log("print");
+        startData = e.target.value.trim();
 
-      if (!startData) {
-        e.target.classList.remove("iconGreen");
-        e.target.classList.remove("borderColorGreen");
-        e.target.classList.add("borderColorRed");
-        e.target.previousElementSibling.classList.add("labelColorRed");
-        e.target.nextElementSibling.nextElementSibling.classList.add("visible");
-        let defaultValue = "";
-        e.target.value = defaultValue;
-        console.log("Tanamdeboba carielia ");
-        return;
-      } else {
-        e.target.classList.remove("borderColorRed");
-        e.target.previousElementSibling.classList.remove("labelColorRed");
-        e.target.nextElementSibling.nextElementSibling.classList.remove(
-          "visible"
-        );
-        // e.target.classList.add("iconGreen");     *********** ალბათ ზედმეტი იქნება მწვანე იკონი
-        e.target.classList.add("borderColorGreen");
-        return;
-      }
-    } else if (e.target.id === "endData") {
-      endData = e.target.value.trim();
-      if (!endData) {
-        e.target.classList.remove("iconGreen");
-        e.target.classList.remove("borderColorGreen");
-        e.target.classList.add("borderColorRed");
-        e.target.previousElementSibling.classList.add("labelColorRed");
-        e.target.nextElementSibling.nextElementSibling.classList.add("visible");
-        let defaultValue = "";
-        e.target.value = defaultValue;
-        console.log("Tanamdeboba carielia ");
-        return;
-      } else {
-        e.target.classList.remove("borderColorRed");
-        e.target.previousElementSibling.classList.remove("labelColorRed");
-        e.target.nextElementSibling.nextElementSibling.classList.remove(
-          "visible"
-        );
-        // e.target.classList.add("iconGreen");  *************gavutishot zedmetia
-        e.target.classList.add("borderColorGreen");
-        return;
-      }
-    } else if (e.target.id === "description") {
-      description = e.target.value.trim();
-      if (!description) {
-        e.target.classList.remove("iconGreen");
-        e.target.classList.remove("borderColorGreen");
-        e.target.classList.add("borderColorRed");
-        e.target.previousElementSibling.classList.add("labelColorRed");
-        e.target.nextElementSibling.classList.add("visible");
-        let defaultValue = "";
-        e.target.value = defaultValue;
-        console.log("Tanamdeboba carielia ");
-        return;
-      } else {
-        e.target.classList.remove("borderColorRed");
-        e.target.previousElementSibling.classList.remove("labelColorRed");
-        e.target.nextElementSibling.classList.remove("visible");
-        e.target.classList.add("iconGreen");
-        e.target.classList.add("borderColorGreen");
-        return;
+        if (!startData) {
+          e.target.classList.remove("iconGreen");
+          e.target.classList.remove("borderColorGreen");
+          e.target.classList.add("borderColorRed");
+          e.target.previousElementSibling.classList.add("labelColorRed");
+          e.target.nextElementSibling.nextElementSibling.classList.add(
+            "visible"
+          );
+          let defaultValue = "";
+          e.target.value = defaultValue;
+          localStorage.setItem(`startData${i}`, "");
+          console.log("Tanamdeboba carielia ");
+          return;
+        } else {
+          e.target.classList.remove("borderColorRed");
+          e.target.previousElementSibling.classList.remove("labelColorRed");
+          e.target.nextElementSibling.nextElementSibling.classList.remove(
+            "visible"
+          );
+          // e.target.classList.add("iconGreen");     *********** ალბათ ზედმეტი იქნება მწვანე იკონი
+          e.target.classList.add("borderColorGreen");
+          localStorage.setItem(`startData${i}`, startData);
+          return;
+        }
+      } else if (e.target.id === `endData${i}`) {
+        endData = e.target.value.trim();
+        if (!endData) {
+          e.target.classList.remove("iconGreen");
+          e.target.classList.remove("borderColorGreen");
+          e.target.classList.add("borderColorRed");
+          e.target.previousElementSibling.classList.add("labelColorRed");
+          e.target.nextElementSibling.nextElementSibling.classList.add(
+            "visible"
+          );
+          let defaultValue = "";
+          e.target.value = defaultValue;
+          localStorage.setItem(`endData${i}`, "");
+          console.log("Tanamdeboba carielia ");
+          return;
+        } else {
+          e.target.classList.remove("borderColorRed");
+          e.target.previousElementSibling.classList.remove("labelColorRed");
+          e.target.nextElementSibling.nextElementSibling.classList.remove(
+            "visible"
+          );
+          // e.target.classList.add("iconGreen");  *************gavutishot zedmetia
+          e.target.classList.add("borderColorGreen");
+          localStorage.setItem(`endData${i}`, endData);
+          return;
+        }
+      } else if (e.target.id === `description${i}`) {
+        description = e.target.value.trim();
+        if (!description) {
+          e.target.classList.remove("iconGreen");
+          e.target.classList.remove("borderColorGreen");
+          e.target.classList.add("borderColorRed");
+          e.target.previousElementSibling.classList.add("labelColorRed");
+          e.target.nextElementSibling.classList.add("visible");
+          let defaultValue = "";
+          e.target.value = defaultValue;
+          localStorage.setItem(`description${i}`, "");
+          console.log("Tanamdeboba carielia ");
+          return;
+        } else {
+          e.target.classList.remove("borderColorRed");
+          e.target.previousElementSibling.classList.remove("labelColorRed");
+          e.target.nextElementSibling.classList.remove("visible");
+          e.target.classList.add("iconGreen");
+          e.target.classList.add("borderColorGreen");
+          console.log("aqvar");
+          localStorage.setItem(`description${i}`, description);
+          return;
+        }
       }
     }
   });
 }
 
 //  ***************  personal.html The end  ***************** //
-
-//                   VALIDATIONS   The and//
 
 // Data Variables //
 
@@ -441,61 +551,58 @@ function fetchData() {
 }
 // **************************** //
 
-/// SAVE TO LOCAL STORAGE
-
-if (window.location.pathname === "/personal.html") {
-  form.addEventListener("change", function (e) {
-    e.preventDefault();
-    if (e.target.id === "fName" && e.target.value) {
-      uName = e.target.value;
-
-      localStorage.setItem("name", uName);
-      console.log(uName);
-    } else if (e.target.id === "lastName" && e.target.value) {
-      lastName = e.target.value;
-
-      localStorage.setItem("surname", lastName);
-      console.log(lastName);
-    } else if (e.target.id === "uploadButton" && e.target.value) {
-      // Retrieve the uploaded photo from local storage
-
-      let reader = new FileReader();
-      reader.onload = function () {
-        localStorage.setItem("image", reader.result);
-
-        console.log(e.target.value);
-        imagePreview.src = reader.result;
-      };
-      reader.readAsDataURL(e.target.files[0]);
-
-      dataGenerator();
-      console.log(e.target.value);
-    } else if (e.target.id === "aboutMe" && e.target.value) {
-      aboutMe = e.target.value;
-
-      localStorage.setItem("about_me", aboutMe);
-      console.log(aboutMe);
-    } else if (e.target.id === "mail" && e.target.value) {
-      email = e.target.value;
-
-      localStorage.setItem("email", email);
-      console.log(email);
-    } else if (e.target.id === "phone" && e.target.value) {
-      phone = e.target.value;
-
-      localStorage.setItem("phone_number", phone);
-      console.log(phone);
-    }
-  });
-}
-
-//*********************************************** */
-
 // Relload Handler
 
 //for experience page//
+
 if (window.location.pathname === "/experience.html") {
   window.addEventListener("load", function () {
+    // hendel  added forms
+
+const formContainer = document.getElementById("form-container");
+const getOuter = document.getElementById("getOUTER");
+
+const formKeys = Object.keys(localStorage).filter(key => key.startsWith("newForm"));
+const outputKeys = Object.keys(localStorage).filter(key => key.startsWith("OnewForm"));
+
+formKeys.sort();
+outputKeys.sort();
+
+let formCount = localStorage.getItem("count");
+formCount = parseInt(formCount, 10);
+
+for (let i = 0; i <= formCount; i++) {
+  const formKey = `newForm${i}`;
+  const outputKey = `OnewForm${i}`;
+
+  if (formKeys.includes(formKey)) {
+    const savedData = localStorage.getItem(formKey);
+    if (savedData) {
+      const container = document.createElement("div");
+      container.innerHTML = savedData;
+      formContainer.appendChild(container);
+    }
+  } if (outputKeys.includes(outputKey)) {
+    const saveOUTPUT = localStorage.getItem(outputKey);
+    if (saveOUTPUT) {
+      const getOuterElement = document.createElement("div");
+      getOuterElement.innerHTML = saveOUTPUT;
+      getOuter.appendChild(getOuterElement);
+    }
+  }
+}
+
+    
+
+    const inputs = form2Container.querySelectorAll("input, textarea");
+    inputs.forEach((input) => {
+      const id = input.id;
+      Object.entries(localStorage).forEach(([key, value]) => {
+        if (key === id) {
+          input.value = value;
+        }
+      });
+    });
     uName = localStorage.getItem("name");
     if (uName) {
       formData.append("name", uName);
@@ -543,7 +650,7 @@ if (window.location.pathname === "/experience.html") {
 
     email = localStorage.getItem("email");
     if (email) {
-      formData.set("email", email);
+      formData.append("email", email);
       document.querySelector(".mail").classList.remove("hide");
       document.querySelector(".mail").innerText = email;
       document.getElementsByClassName(".mail").value = email;
@@ -551,7 +658,7 @@ if (window.location.pathname === "/experience.html") {
 
     phone = localStorage.getItem("phone_number");
     if (phone) {
-      formData.set("phone_number", phone);
+      formData.append("phone_number", phone);
       document.querySelector(".phone").classList.remove("hide");
       document.querySelector(".phone").innerText = phone;
       document.getElementsByClassName(".phone").value = phone;
@@ -644,7 +751,9 @@ if (window.location.pathname === "/personal.html") {
   });
 }
 
-// liveStrem to the right side
+//                           liveStrem to the right side
+
+//   personal.html
 
 if (window.location.pathname === "/personal.html") {
   form.addEventListener("input", function (e) {
@@ -689,6 +798,77 @@ if (window.location.pathname === "/personal.html") {
     }
   });
 }
+
+// experience html
+if (window.location.pathname === "/experience.html") {
+  formDiv.addEventListener("input", function (e) {
+    const experienceOutputDiv = document.querySelector(".experience-output-div");
+    
+    let formCount=localStorage.getItem('count')
+    formCount=parseInt(formCount)
+    const inputs = form2Container.querySelectorAll("input, textarea");
+    inputs.forEach((input, index) => {
+      const id = input.id;
+      let value = input.value;
+      let update1 = "";
+      let update2 = "";
+      for (let i = 0; i <= inputs.length; i++) {
+        let experienceTitle=experienceOutputDiv.querySelector(`.experience-output`)
+        let justHypen=experienceOutputDiv.querySelector(`.justHypen`)
+        let employeeOutput=experienceOutputDiv.querySelector(`.employee${i}`)
+        let positionOutput=experienceOutputDiv.querySelector(`.position${i}`)
+        let startDataOutput=experienceOutputDiv.querySelector(`.startData${i}`)
+        let endDataOutput=experienceOutputDiv.querySelector(`.endData${i}`)
+        let descriptionOutput=experienceOutputDiv.querySelector(`.description${i}`)
+        let forms = document.querySelector(`.newForm${i}`);
+        if (forms) {
+         
+          if ((id === positionOutput.classList[3] )  && (input.value)) {
+            positionOutput.classList.replace("hide", "chita-chita")
+            update1 = value.substring(0, 25);
+
+            console.log("eemase");
+            value = update1;
+          } 
+          if( (id === employeeOutput.classList[2]) && (input.value)){
+            employeeOutput.classList.replace("hide", "chita-chita")
+            
+            experienceTitle.classList.replace("hide", "chita-chita")
+
+            update1 = value.substring(0, 25);
+
+            value = update1;
+          }
+          if( (id === startDataOutput.classList[2]) && (input.value)){
+            startDataOutput.classList.replace("hide", "chita-chita")
+
+            update1 = value.substring(0, 25);
+            value = update1;
+          }
+          if ((id === endDataOutput.classList[2]) && (input.value)){
+            endDataOutput.classList.replace("hide", "chita-chita")
+            justHypen.classList.replace("hide", "chita-chita")
+
+            update1 = value.substring(0, 25);
+            value = update1;
+          }
+          if ((id === descriptionOutput.classList[2]) && (input.value)) {
+            descriptionOutput.classList.replace("hide", "chita-chita")
+
+            update2 = value.slice(0, 400);
+            value = update2;
+          }
+        }
+      }
+
+      const div = document.querySelector(`.${id}`);
+      if (div) {
+        div.innerHTML = value;
+      }
+    });
+  });
+}
+
 // ************************//
 
 // updateLiveStreamofData
