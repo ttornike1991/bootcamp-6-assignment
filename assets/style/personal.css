@@ -234,6 +234,7 @@ width: 70%!important;
 }
 .aboutMes{
   border-bottom: 2px solid #C8C8C8;
+   
   padding-bottom: 20px;
 }
 
@@ -366,6 +367,26 @@ h6{
 .right-container {
   width: 40%;
 }
+.borderTOPs{
+  margin-top: 30px;
+  margin-bottom: 20px;
+  width: 250px;
+  border-top: 2px dotted  #c8c8c8;
+}
+.description-output {
+  font-family: "Helvetica Neue";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+
+  color: #000000;
+  width: 400px!important;
+  margin-top: 14px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  
+}
 
 .ouput-info {
   margin-top: 68px;
@@ -438,6 +459,8 @@ h6{
   line-height: 22px;
   text-transform: lowercase;
   color: #000000;
+  overflow-wrap: break-word!important;
+  width: 600px;
 }
 .output-photo {
   position: absolute;
@@ -462,11 +485,12 @@ h6{
 .aboutMes {
   border-bottom: 2px solid #c8c8c8;
   padding-bottom: 20px;
+  overflow-wrap: break-word!important;
 }
 
 .experience-output-div {
   position: absolute;
-  top: 390px;
+  top: 450px;
   
 }
 .experience-output {
@@ -517,7 +541,10 @@ h6{
 }
 
 .justHypen {
-  padding: 0px 8px;
+  padding: 0px 8px!important;
+}
+.margineTop2{
+  margin-top: 16px;
 }
 .data-output * {
   font-family: "Helvetica Neue";
@@ -525,7 +552,7 @@ h6{
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
-
+margin-top: 16px;
   color: #919191;
 }
 .description-output {
@@ -534,7 +561,7 @@ h6{
   font-weight: 600;
   font-size: 18px;
   line-height: 22px;
-
+  overflow-wrap: break-word;
   color: #000000;
   width: 600px;
   margin-top: 14px;
@@ -578,6 +605,7 @@ h6{
 }
 .invalid {
   position: absolute;
+  z-index: -1;
   left: 101%;
   top: 36%;
   background-image: url(/assets/images/redvector.png);

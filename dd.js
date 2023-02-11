@@ -1,47 +1,52 @@
-/// SAVE TO LOCAL STORAGE
-
-if (window.location.pathname === "/personal.html") {
-    form.addEventListener("change", function (e) {
-      e.preventDefault();
-      if (e.target.id === "fName" && e.target.value) {
-        uName = e.target.value;
-  
-        localStorage.setItem("name", uName);
-        console.log(uName);
-      } else if (e.target.id === "lastName" && e.target.value) {
-        lastName = e.target.value;
-  
-        localStorage.setItem("surname", lastName);
-        console.log(lastName);
-      } else if (e.target.id === "uploadButton" && e.target.value) {
-        // Retrieve the uploaded photo from local storage
-  
-        let reader = new FileReader();
-        reader.onload = function () {
-          localStorage.setItem("image", reader.result);
-  
-          console.log(e.target.value);
-          imagePreview.src = reader.result;
-        };
-        reader.readAsDataURL(e.target.files[0]);
-  
-        dataGenerator();
-        console.log(e.target.value);
-      } else if (e.target.id === "aboutMe" && e.target.value) {
-        aboutMe = e.target.value;
-  
-        localStorage.setItem("about_me", aboutMe);
-        console.log(aboutMe);
-      } else if (e.target.id === "mail" && e.target.value) {
-        email = e.target.value;
-  
-        localStorage.setItem("email", email);
-        console.log(email);
-      } else if (e.target.id === "phone" && e.target.value) {
-        phone = e.target.value;
-  
-        localStorage.setItem("phone_number", phone);
-        console.log(phone);
-      }
-    });
+const experiences = {};
+   
+// loop through localStorage to extract properties
+for (let i = 0; i < localStorage.length; i++) {
+const key = localStorage.key(i);
+if (key.startsWith("position")) {
+  const index = key.substring("position".length);
+  // create a new object for the experience if it doesn't exist yet
+  if (!experiences[index]) {
+    experiences[index] = {};
   }
+  // add the properties to the experience object
+  experiences[index].position = localStorage.getItem(`position${index}`);
+} else if (key.startsWith("employee")) {
+  const index = key.substring("employer".length);
+  // create a new object for the experience if it doesn't exist yet
+  if (!experiences[index]) {
+    experiences[index] = {};
+  }
+  // add the properties to the experience object
+  experiences[index].employer = localStorage.getItem(`employee${index}`);
+} else if (key.startsWith("startData")) {
+  const index = key.substring("startData".length);
+  // create a new object for the experience if it doesn't exist yet
+  if (!experiences[index]) {
+    experiences[index] = {};
+  }
+  // add the properties to the experience object
+  experiences[index].start_date = localStorage.getItem(`startData${index}`);
+} else if (key.startsWith("endData")) {
+  const index = key.substring("endData".length);
+  // create a new object for the experience if it doesn't exist yet
+  if (!experiences[index]) {
+    experiences[index] = {};
+  }
+  // add the properties to the experience object
+  experiences[index].due_date = localStorage.getItem(`endData${index}`);
+} else if (key.startsWith("description")) {
+  const index = key.substring("description".length);
+  // create a new object for the experience if it doesn't exist yet
+  if (!experiences[index]) {
+    experiences[index] = {};
+  }
+  // add the properties to the experience object
+  experiences[index].description = localStorage.getItem(`description${index}`);
+}
+ 
+
+}
+
+// log the generated experiences
+console.log(experiences);

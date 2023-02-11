@@ -1,10 +1,22 @@
 const form = document.getElementById("form-personal-info");
+const formssss = document.querySelector(".experience-info");
 const form2 = document.getElementById("form-personal-info2");
-
+const addFormBut = document.querySelectorAll(".add-form");
 const imageInput = document.getElementById("uploadButton");
 const imagePreview = document.getElementById("imagePreview");
 const formDiv = document.getElementById("form-container");
 const form2Container = document.getElementById("experience-info");
+
+// Data Variables //
+
+let uName;
+let lastName;
+let userImage;
+let aboutMe;
+let mailBox;
+let mobileNum;
+
+// arrow key localstorage clear and go initial page
 document.querySelector(".leftward-arrow").addEventListener("click", () => {
   localStorage.clear();
   console.log(localStorage);
@@ -19,12 +31,10 @@ document.querySelector(".leftward-arrow").addEventListener("click", () => {
 if (window.location.pathname === "/personal.html") {
   // replace upload button //
 
-  document
-    .getElementById("file-input-button")
-    .addEventListener("click", function (e) {
-      e.preventDefault();
-      document.getElementById("uploadButton").click();
-    });
+  document.getElementById("file-input-button").addEventListener("click", function (e) {
+    e.preventDefault();
+    document.getElementById("uploadButton").click();
+  });
 
   form.addEventListener("change", function (e) {
     e.preventDefault();
@@ -33,11 +43,7 @@ if (window.location.pathname === "/personal.html") {
     if (e.target.id === "fName") {
       firstName = e.target.value.trim();
       let GeorgianChars = /^[\u10A0-\u10FF]+$/;
-      if (
-        !firstName ||
-        firstName.length < 2 ||
-        !GeorgianChars.test(firstName)
-      ) {
+      if (!firstName || firstName.length < 2 || !GeorgianChars.test(firstName)) {
         e.target.classList.remove("iconGreen");
         e.target.classList.remove("borderColorGreen");
         e.target.classList.add("borderColorRed");
@@ -54,9 +60,7 @@ if (window.location.pathname === "/personal.html") {
         localStorage.setItem("name", firstName);
         e.target.classList.remove("borderColorRed");
         e.target.previousElementSibling.classList.remove("labelColorRed");
-        e.target.nextElementSibling.nextElementSibling.classList.remove(
-          "visible"
-        );
+        e.target.nextElementSibling.nextElementSibling.classList.remove("visible");
         e.target.classList.add("iconGreen");
         e.target.classList.add("borderColorGreen");
         return;
@@ -79,9 +83,7 @@ if (window.location.pathname === "/personal.html") {
         localStorage.setItem("surname", lastName);
         e.target.previousElementSibling.classList.remove("labelColorRed");
         e.target.classList.remove("borderColorRed");
-        e.target.nextElementSibling.nextElementSibling.classList.remove(
-          "visible"
-        );
+        e.target.nextElementSibling.nextElementSibling.classList.remove("visible");
         e.target.classList.add("iconGreen");
         e.target.classList.add("borderColorGreen");
       }
@@ -103,9 +105,7 @@ if (window.location.pathname === "/personal.html") {
         localStorage.setItem("email", email);
         e.target.previousElementSibling.classList.remove("labelColorRed");
         e.target.classList.remove("borderColorRed");
-        e.target.nextElementSibling.nextElementSibling.classList.remove(
-          "visible"
-        );
+        e.target.nextElementSibling.nextElementSibling.classList.remove("visible");
         e.target.classList.add("borderColorGreen");
         e.target.classList.add("iconGreen2");
       }
@@ -129,9 +129,7 @@ if (window.location.pathname === "/personal.html") {
         localStorage.setItem("phone_number", mobile);
         e.target.previousElementSibling.classList.remove("labelColorRed");
         e.target.classList.remove("borderColorRed");
-        e.target.nextElementSibling.nextElementSibling.classList.remove(
-          "visible"
-        );
+        e.target.nextElementSibling.nextElementSibling.classList.remove("visible");
         e.target.classList.add("borderColorGreen");
         e.target.classList.add("iconGreen");
       }
@@ -181,26 +179,32 @@ if (window.location.pathname === "/personal.html") {
 //*****************//
 //*experience.html*//
 //*****************//
+let localCounter = localStorage.getItem("count");
+localCounter = parseInt(localCounter);
 
+if (localCounter === null || localCounter === undefined || isNaN(localCounter)) {
+  localCounter = 0;
+} else {
+  localCounter = parseInt(localCounter);
+}
+localStorage.setItem("count", localCounter.toString());
 if (window.location.pathname === "/experience.html") {
-  formDiv.addEventListener("click", function (e) {
-    let formCount = localStorage.getItem("count");
-    if (formCount === null || formCount === undefined || isNaN(formCount)) {
-      formCount = 0;
-    } else {
-      formCount = parseInt(formCount);
-    }
-    formCount++;
-    localStorage.setItem("count", formCount);
+  formssss.addEventListener("click", function (e) {
     if (e.target.classList.contains("add-form")) {
-      (function () {
-        let newForm = document.createElement("div");
+      let x = localStorage.getItem("count");
+      let formCount = +x;
+      formCount++;
+      localStorage.setItem("count", formCount.toString());
 
-        newForm.innerHTML = `<form
+      if (e.target.classList.contains("add-form")) {
+        (function () {
+          let newForm = document.createElement("div");
+
+          newForm.innerHTML = `<form
     action=""
     class="experience-info-form newForm${formCount}"
     id="form-personal-info "
-  >
+    >
     <div
       class="displayFlex flexColumn position-div relative marginBottom"
     >
@@ -271,75 +275,77 @@ if (window.location.pathname === "/experience.html") {
       <a class="add-form" id="add-form">მეტი გამოცდილების დამატება</a>
     </div>
     <button id="submit" type="submit" class="absolutePosition hiddenButton"></button>
-  </form>`;
+    </form>`;
 
-        let outputform = document.createElement("div");
+          let outputform = document.createElement("div");
 
-        outputform.innerHTML = `<div  id="OnewForm${formCount}">
-    <div class="borderTOP"></div>
+          outputform.innerHTML = `
+          <div class="hide">dwadwadwa</div>
+          <div  id="OnewForm${formCount}">
+    <div class="hide borderTOP borderTOPs${formCount}"></div>
     <div class="displayFlex">
-      <h4 class="hide position-output marginBottom8px position${formCount}">
-        React Native Developer,
+      <h4 class="hide position-output marginBottom8px position${formCount}" name="xxxx">
+        
       </h4>
-      <h4 class="hide employee-output employee${formCount}">Microsoft</h4>
+      <h4 class="hide employee-output employee${formCount}" name="xxxx"> </h4>
     </div>
     <div class="displayFlex data-output">
-      <h5 class="hide startData-output startData${formCount}">2020-09-23</h5>
-      <h5 class="hide justHypen">-</h5>
-      <h5 class="hide endData-output endData${formCount}">2020-09-23</h5>
+      <h5 class="hide startData-output startData${formCount}" name="xxxx"> </h5>
+      <h5 class="hide  justHypen justHypen${formCount}">-</h5>
+      <h5 class="hide endData-output endData${formCount}" name="xxxx"> </h5>
     </div>
-    <div class="hide description-output description${formCount}">
-      Experienced Javascript Native Developer with 5 years in the
-      industry. proficient withreact.
+    <div class="hide description-output description${formCount}" name="xxxx">
+      
     </div>
-  </div>`;
-        localStorage.setItem(`newForm${formCount}`, newForm.innerHTML);
-        localStorage.setItem(`OnewForm${formCount}`, outputform.innerHTML);
-        document.getElementById("form-container").appendChild(newForm);
-        document.getElementById("getOUTER").appendChild(outputform);
-      })();
-      console.log(formCount);
+    </div>`;
 
-      console.log(localStorage);
+          localStorage.setItem(`newForm${formCount}`, newForm.innerHTML);
+          localStorage.setItem(`OnewForm${formCount}`, outputform.innerHTML);
+          document.getElementById("form-container").appendChild(newForm);
+        })();
+        console.log(formCount);
+
+        console.log(localStorage);
+      }
     }
   });
 
   // dynamicaly adding forms and checking emptycase
 
-  document
-    .getElementById("submitExperience")
-    .addEventListener("click", function (e) {
-      e.preventDefault();
+  document.getElementById("submitExperience").addEventListener("click", function (e) {
+    e.preventDefault();
 
-      var forms = document.getElementsByClassName("experience-info-form");
-      for (var i = 0; i < forms.length; i++) {
-        var formElements = forms[i].elements;
-        var formHasValues = false;
+    var forms = document.getElementsByClassName("experience-info-form");
+    for (var i = 0; i < forms.length; i++) {
+      var formElements = forms[i].elements;
+      var formHasValues = false;
 
-        for (var j = 0; j < formElements.length; j++) {
-          if (formElements[j].value.trim() !== "") {
-            formHasValues = true;
-          }
-        }
-
-        if (!formHasValues && i !== 0) {
-          console.log("Form is empty, skipping validation.");
-          continue;
-        }
-
-        if (!forms[i].checkValidity()) {
-          forms[i].reportValidity();
-        } else {
-          forms[i].click();
-          console.log("Form is valid, submitting...");
+      for (var j = 0; j < formElements.length; j++) {
+        if (formElements[j].value.trim() !== "") {
+          formHasValues = true;
         }
       }
-    });
 
+      if (!formHasValues && i !== 0) {
+        console.log("Form is empty, skipping validation.");
+        continue;
+      }
+
+      if (!forms[i].checkValidity()) {
+        forms[i].reportValidity();
+      } else {
+        forms[i].click();
+        console.log("Form is valid, submitting...");
+      }
+    }
+  });
+}
+if (window.location.pathname === "/experience.html") {
   form2Container.addEventListener("change", function (e) {
     e.preventDefault();
     let formCount = localStorage.getItem("count");
     formCount = parseInt(formCount);
+
     for (let i = 0; i <= formCount; i++) {
       let position, employee, startData, endData, description;
       if (e.target.id === `position${i}`) {
@@ -349,9 +355,7 @@ if (window.location.pathname === "/experience.html") {
           e.target.classList.remove("borderColorGreen");
           e.target.classList.add("borderColorRed");
           e.target.previousElementSibling.classList.add("labelColorRed");
-          e.target.nextElementSibling.nextElementSibling.classList.add(
-            "visible"
-          );
+          e.target.nextElementSibling.nextElementSibling.classList.add("visible");
           let defaultValue = "";
           e.target.value = defaultValue;
           localStorage.setItem(`position${i}`, "");
@@ -360,9 +364,7 @@ if (window.location.pathname === "/experience.html") {
         } else {
           e.target.classList.remove("borderColorRed");
           e.target.previousElementSibling.classList.remove("labelColorRed");
-          e.target.nextElementSibling.nextElementSibling.classList.remove(
-            "visible"
-          );
+          e.target.nextElementSibling.nextElementSibling.classList.remove("visible");
           e.target.classList.add("iconGreen");
           e.target.classList.add("borderColorGreen");
           localStorage.setItem(`position${i}`, position);
@@ -375,9 +377,7 @@ if (window.location.pathname === "/experience.html") {
           e.target.classList.remove("borderColorGreen");
           e.target.classList.add("borderColorRed");
           e.target.previousElementSibling.classList.add("labelColorRed");
-          e.target.nextElementSibling.nextElementSibling.classList.add(
-            "visible"
-          );
+          e.target.nextElementSibling.nextElementSibling.classList.add("visible");
           let defaultValue = "";
           e.target.value = defaultValue;
           localStorage.setItem(`employee${i}`, "");
@@ -386,9 +386,7 @@ if (window.location.pathname === "/experience.html") {
         } else {
           e.target.classList.remove("borderColorRed");
           e.target.previousElementSibling.classList.remove("labelColorRed");
-          e.target.nextElementSibling.nextElementSibling.classList.remove(
-            "visible"
-          );
+          e.target.nextElementSibling.nextElementSibling.classList.remove("visible");
           e.target.classList.add("iconGreen");
           e.target.classList.add("borderColorGreen");
           localStorage.setItem(`employee${i}`, employee);
@@ -403,9 +401,7 @@ if (window.location.pathname === "/experience.html") {
           e.target.classList.remove("borderColorGreen");
           e.target.classList.add("borderColorRed");
           e.target.previousElementSibling.classList.add("labelColorRed");
-          e.target.nextElementSibling.nextElementSibling.classList.add(
-            "visible"
-          );
+          e.target.nextElementSibling.nextElementSibling.classList.add("visible");
           let defaultValue = "";
           e.target.value = defaultValue;
           localStorage.setItem(`startData${i}`, "");
@@ -414,9 +410,7 @@ if (window.location.pathname === "/experience.html") {
         } else {
           e.target.classList.remove("borderColorRed");
           e.target.previousElementSibling.classList.remove("labelColorRed");
-          e.target.nextElementSibling.nextElementSibling.classList.remove(
-            "visible"
-          );
+          e.target.nextElementSibling.nextElementSibling.classList.remove("visible");
           // e.target.classList.add("iconGreen");     *********** ალბათ ზედმეტი იქნება მწვანე იკონი
           e.target.classList.add("borderColorGreen");
           localStorage.setItem(`startData${i}`, startData);
@@ -429,9 +423,7 @@ if (window.location.pathname === "/experience.html") {
           e.target.classList.remove("borderColorGreen");
           e.target.classList.add("borderColorRed");
           e.target.previousElementSibling.classList.add("labelColorRed");
-          e.target.nextElementSibling.nextElementSibling.classList.add(
-            "visible"
-          );
+          e.target.nextElementSibling.nextElementSibling.classList.add("visible");
           let defaultValue = "";
           e.target.value = defaultValue;
           localStorage.setItem(`endData${i}`, "");
@@ -440,9 +432,7 @@ if (window.location.pathname === "/experience.html") {
         } else {
           e.target.classList.remove("borderColorRed");
           e.target.previousElementSibling.classList.remove("labelColorRed");
-          e.target.nextElementSibling.nextElementSibling.classList.remove(
-            "visible"
-          );
+          e.target.nextElementSibling.nextElementSibling.classList.remove("visible");
           // e.target.classList.add("iconGreen");  *************gavutishot zedmetia
           e.target.classList.add("borderColorGreen");
           localStorage.setItem(`endData${i}`, endData);
@@ -476,16 +466,7 @@ if (window.location.pathname === "/experience.html") {
   });
 }
 
-//  ***************  personal.html The end  ***************** //
-
-// Data Variables //
-
-let uName;
-let lastName;
-let userImage;
-let aboutMe;
-let mailBox;
-let mobileNum;
+//  ***************  description.html The end  ***************** //
 
 let data = {
   experiences: [
@@ -559,42 +540,128 @@ if (window.location.pathname === "/experience.html") {
   window.addEventListener("load", function () {
     // hendel  added forms
 
-const formContainer = document.getElementById("form-container");
-const getOuter = document.getElementById("getOUTER");
+    const formContainer = document.getElementById("form-container");
+    const getOuter = document.getElementById("getOUTER");
 
-const formKeys = Object.keys(localStorage).filter(key => key.startsWith("newForm"));
-const outputKeys = Object.keys(localStorage).filter(key => key.startsWith("OnewForm"));
+    const formKeys = Object.keys(localStorage).filter((key) => key.startsWith("newForm"));
+    const outputKeys = Object.keys(localStorage).filter((key) =>
+      key.startsWith("OnewForm")
+    );
 
-formKeys.sort();
-outputKeys.sort();
+    formKeys.sort();
+    outputKeys.sort();
 
-let formCount = localStorage.getItem("count");
-formCount = parseInt(formCount, 10);
+    let formCount = localStorage.getItem("count");
+    formCount = parseInt(formCount, 10);
 
-for (let i = 0; i <= formCount; i++) {
-  const formKey = `newForm${i}`;
-  const outputKey = `OnewForm${i}`;
+    for (let i = 0; i <= formCount; i++) {
+      const formKey = `newForm${i}`;
+      const outputKey = `OnewForm${i}`;
 
-  if (formKeys.includes(formKey)) {
-    const savedData = localStorage.getItem(formKey);
-    if (savedData) {
-      const container = document.createElement("div");
-      container.innerHTML = savedData;
-      formContainer.appendChild(container);
+      if (formKeys.includes(formKey)) {
+        const savedData = localStorage.getItem(formKey);
+        if (savedData) {
+          const container = document.createElement("div");
+          container.innerHTML = savedData;
+          formContainer.appendChild(container);
+        }
+      }
+      if (outputKeys.includes(outputKey)) {
+        const saveOUTPUT = localStorage.getItem(outputKey);
+        if (saveOUTPUT) {
+          const getOuterElement = document.createElement("div");
+          getOuterElement.innerHTML = saveOUTPUT;
+          getOuter.appendChild(getOuterElement);
+        }
+      }
     }
-  } if (outputKeys.includes(outputKey)) {
-    const saveOUTPUT = localStorage.getItem(outputKey);
-    if (saveOUTPUT) {
-      const getOuterElement = document.createElement("div");
-      getOuterElement.innerHTML = saveOUTPUT;
-      getOuter.appendChild(getOuterElement);
-    }
-  }
-}
 
-    
+    const experienceOutputDiv = document.querySelector(".experience-output-div");
 
     const inputs = form2Container.querySelectorAll("input, textarea");
+
+    inputs.forEach((input, index) => {
+      const id = input.id;
+      let value = input.value;
+      let update1 = "";
+      let update2 = "";
+      for (let i = 0; i <= inputs.length; i++) {
+        let experienceTitle = experienceOutputDiv.querySelector(`.experience-output`);
+        let experienceTitleclassList = experienceTitle ? experienceTitle.classList : [];
+        let justHypen = experienceOutputDiv.querySelector(`.justHypen${i}`) || [];
+        let justHypenclassList = justHypen ? justHypen.classList : [];
+        let employeeOutput = experienceOutputDiv.querySelector(`.employee${i}`);
+        let positionOutput = experienceOutputDiv.querySelector(`.position${i}`);
+        let startDataOutput = experienceOutputDiv.querySelector(`.startData${i}`);
+        let endDataOutput = experienceOutputDiv.querySelector(`.endData${i}`);
+        let descriptionOutput = experienceOutputDiv.querySelector(`.description${i}`);
+        let forms = document.querySelector(`.newForm${i}`);
+        if (forms) {
+          if (
+            id === positionOutput.classList[3] &&
+            localStorage.getItem(`position${i}`)
+          ) {
+            positionValue = localStorage.getItem(`position${i}`);
+            positionOutput.classList.replace("hide", "chita-chita");
+            experienceTitle.classList.replace("hide", "chita-chita");
+            update1 = positionValue.substring(0, 25) + ",";
+
+            value = update1;
+          }
+          if (
+            id === employeeOutput.classList[2] &&
+            localStorage.getItem(`employee${i}`)
+          ) {
+            employeeValue = localStorage.getItem(`employee${i}`);
+            employeeOutput.classList.replace("hide", "chita-chita");
+
+            experienceTitleclassList.replace("hide", "chita-chita");
+            update1 = employeeValue.substring(0, 25);
+
+            value = update1;
+          }
+          if (
+            id === startDataOutput.classList[2] &&
+            localStorage.getItem(`startData${i}`)
+          ) {
+            startDataValue = localStorage.getItem(`startData${i}`);
+            startDataOutput.classList.replace("hide", "chita-chita");
+            experienceTitle.classList.replace("hide", "chita-chita");
+
+            update1 = startDataValue.substring(0, 25);
+            value = update1;
+          }
+          if (id === endDataOutput.classList[2] && localStorage.getItem(`endData${i}`)) {
+            endDataValue = localStorage.getItem(`endData${i}`);
+
+            endDataOutput.classList.replace("hide", "chita-chita");
+
+            justHypenclassList.replace("hide", "chita-chita");
+            experienceTitleclassList.replace("hide", "chita-chita");
+
+            update1 = endDataValue.substring(0, 25);
+            value = update1;
+          }
+          if (
+            id === descriptionOutput.classList[2] &&
+            localStorage.getItem(`description${i}`)
+          ) {
+            descriptionValue = localStorage.getItem(`description${i}`);
+            descriptionOutput.classList.replace("hide", "chita-chita");
+            experienceTitleclassList.replace("hide", "chita-chita");
+
+            update2 = descriptionValue.slice(0, 400);
+            value = update2;
+          }
+        }
+      }
+
+      const div = document.querySelector(`.${id}`);
+      if (div) {
+        div.innerHTML = value;
+      }
+    });
+
     inputs.forEach((input) => {
       const id = input.id;
       Object.entries(localStorage).forEach(([key, value]) => {
@@ -670,6 +737,7 @@ for (let i = 0; i <= formCount; i++) {
     fetchData();
   });
 }
+
 //for personal page//
 
 if (window.location.pathname === "/personal.html") {
@@ -743,10 +811,18 @@ if (window.location.pathname === "/personal.html") {
       document.getElementsByClassName(".phone").value = phone;
       formData.set("phone_number", phone);
     }
+    // const container = document.getElementById("getOUTER");
+    // for (let i = 0; i < localStorage.length; i++) {
+    //   const key = localStorage.key(i);
+    //   if (key.startsWith("OnewForm")) {
+    //     const divElement = localStorage.getItem(key);
+    //     const tempDiv = document.createElement("div");
+    //     tempDiv.innerHTML = divElement;
 
-    for (let [key, value] of formData.entries()) {
-      console.log(key + ": " + value, "sasa");
-    }
+    //     container.appendChild(tempDiv);
+    //   }
+    // }
+
     fetchData();
   });
 }
@@ -799,62 +875,140 @@ if (window.location.pathname === "/personal.html") {
   });
 }
 
+//waaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa  handler of right Output persistance         aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+if (window.location.pathname === "/personal.html") {
+  window.addEventListener("load", function () {
+    console.log(localStorage.getItem("position1"), "ss");
+    for (let i = 0; i < localStorage.length; i++) {
+      let getOUTER = document.querySelector("#getOUTER");
+      let OnewForm = localStorage.getItem(`OnewForm${i}`);
+      console.log(OnewForm);
+      let justBeautyBorder = getOUTER.querySelector(`.borderTOPs${i}`);
+      let justhypen = getOUTER.querySelector(`.justHypen${i}`);
+      let positions = getOUTER.querySelector(`.position${i}`);
+      console.log(positions);
+      let employees = getOUTER.querySelector(`.employee${i}`);
+      let startDatas = getOUTER.querySelector(`.startData${i}`);
+      let endDatas = getOUTER.querySelector(`.endData${i}`);
+      let description = getOUTER.querySelector(`.description${i}`);
+      let localStorageKeys = Object.keys(localStorage);
+      // console.log(localStorageKeys);
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = OnewForm;
+      getOUTER.appendChild(tempDiv);
+      try {
+        localStorageKeys.includes(positions.classList[3]);
+        console.log(i);
+
+        experienceTitle = getOUTER.querySelector(`.experience-output`);
+        experienceTitle.classList.replace("hide", "visible");
+        sliceWord = localStorage.getItem(`position${i}`);
+        console.log(sliceWord);
+        positions.innerText = sliceWord.substring(0, 25) + ",";
+        positions.classList.replace("hide", "visible");
+
+        justhypen.classList.replace("hide", "visible");
+        justBeautyBorder.classList.replace("hide", "visible");
+        firstChild.classList.replace("hide", "visible");
+      } catch (e) {
+        console.log(localStorage.getItem`position${i}`);
+      }
+      // console.log(i);
+      try {
+        localStorageKeys.includes(employees.classList[2]);
+        sliceWord = localStorage.getItem(`employee${i}`);
+        // console.log('pirveli');
+        employees.innerText = sliceWord.substring(0, 25) + ",";
+        employees.classList.replace("hide", "visible");
+      } catch (e) {
+        // console.log(`employees${i}`);
+      }
+
+      try {
+        localStorageKeys.includes(startDatas.classList[2]);
+        startDatas.innerText = localStorage.getItem(`startData${i}`);
+        startDatas.classList.replace("hide", "visible");
+      } catch {
+        // console.log(`startDatas${i}`);
+      }
+      try {
+        localStorageKeys.includes(endDatas.classList[2]);
+        endDatas.innerText = localStorage.getItem(`endData${i}`);
+        endDatas.classList.replace("hide", "visible");
+      } catch {
+        // console.log(`endDatas${i}`);
+      }
+      try {
+        localStorageKeys.includes(description.classList[2]);
+        shorter = localStorage.getItem(`description${i}`);
+        description.innerText = shorter.substring(0, 400);
+        description.classList.replace("hide", "visible");
+      } catch {
+        // console.log(`description${i}`);
+      }
+    }
+  });
+}
+
 // experience html
 if (window.location.pathname === "/experience.html") {
   formDiv.addEventListener("input", function (e) {
     const experienceOutputDiv = document.querySelector(".experience-output-div");
-    
-    let formCount=localStorage.getItem('count')
-    formCount=parseInt(formCount)
+
+    let formCount = localStorage.getItem("count");
+    formCount = parseInt(formCount);
     const inputs = form2Container.querySelectorAll("input, textarea");
     inputs.forEach((input, index) => {
       const id = input.id;
       let value = input.value;
       let update1 = "";
       let update2 = "";
-      for (let i = 0; i <= inputs.length; i++) {
-        let experienceTitle=experienceOutputDiv.querySelector(`.experience-output`)
-        let justHypen=experienceOutputDiv.querySelector(`.justHypen`)
-        let employeeOutput=experienceOutputDiv.querySelector(`.employee${i}`)
-        let positionOutput=experienceOutputDiv.querySelector(`.position${i}`)
-        let startDataOutput=experienceOutputDiv.querySelector(`.startData${i}`)
-        let endDataOutput=experienceOutputDiv.querySelector(`.endData${i}`)
-        let descriptionOutput=experienceOutputDiv.querySelector(`.description${i}`)
+      for (let i = 0; i <= formCount; i++) {
+        let experienceTitle = experienceOutputDiv.querySelector(`.experience-output`);
+        let justHypen = experienceOutputDiv.querySelector(`.justHypen${i}`);
+        let employeeOutput = experienceOutputDiv.querySelector(`.employee${i}`);
+        let positionOutput = experienceOutputDiv.querySelector(`.position${i}`);
+        let startDataOutput = experienceOutputDiv.querySelector(`.startData${i}`);
+        let endDataOutput = experienceOutputDiv.querySelector(`.endData${i}`);
+        let descriptionOutput = experienceOutputDiv.querySelector(`.description${i}`);
         let forms = document.querySelector(`.newForm${i}`);
         if (forms) {
-         
-          if ((id === positionOutput.classList[3] )  && (input.value)) {
-            positionOutput.classList.replace("hide", "chita-chita")
-            update1 = value.substring(0, 25);
-
-            console.log("eemase");
+          if (id === positionOutput.classList[3] && input.value) {
+            positionOutput.classList.replace("hide", "chita-chita");
+            update1 = value.substring(0, 25) + ",";
+            experienceTitle.classList.replace("hide", "chita-chita");
             value = update1;
-          } 
-          if( (id === employeeOutput.classList[2]) && (input.value)){
-            employeeOutput.classList.replace("hide", "chita-chita")
-            
-            experienceTitle.classList.replace("hide", "chita-chita")
+          }
+          if (id === employeeOutput.classList[2] && input.value) {
+            employeeOutput.classList.replace("hide", "chita-chita");
+            experienceTitle.classList.replace("hide", "chita-chita");
 
             update1 = value.substring(0, 25);
 
             value = update1;
           }
-          if( (id === startDataOutput.classList[2]) && (input.value)){
-            startDataOutput.classList.replace("hide", "chita-chita")
-
+          if (id === startDataOutput.classList[2] && input.value) {
+            startDataOutput.classList.replace("hide", "chita-chita");
+            experienceTitle.classList.replace("hide", "chita-chita");
             update1 = value.substring(0, 25);
             value = update1;
           }
-          if ((id === endDataOutput.classList[2]) && (input.value)){
-            endDataOutput.classList.replace("hide", "chita-chita")
-            justHypen.classList.replace("hide", "chita-chita")
+          if (id === endDataOutput.classList[2] && input.value) {
+            endDataOutput.classList.replace("hide", "chita-chita");
+            try {
+              justHypen.classList.replace("hide", "chita-chita");
+            } catch (e) {
+              console.error(e);
+            }
 
+            justHypen.classList.replace("hide", "chita-chita");
+            experienceTitle.classList.replace("hide", "chita-chita");
             update1 = value.substring(0, 25);
             value = update1;
           }
-          if ((id === descriptionOutput.classList[2]) && (input.value)) {
-            descriptionOutput.classList.replace("hide", "chita-chita")
-
+          if (id === descriptionOutput.classList[2] && input.value) {
+            descriptionOutput.classList.replace("hide", "chita-chita");
+            experienceTitle.classList.replace("hide", "chita-chita");
             update2 = value.slice(0, 400);
             value = update2;
           }

@@ -29,6 +29,9 @@ html {
   font-family: "Helvetica Neue";
   src: url("/assets/fonts/HelveticaNeue.ttc") format("truetype");
 }
+.marginTop{
+  margin-top: 12px!important;
+}
 body {
   position: relative;
   background: #f9f9f9;
@@ -458,6 +461,9 @@ h6 {
   line-height: 22px;
   text-transform: lowercase;
   color: #000000;
+  word-wrap: break-word!important;
+  overflow-wrap: break-word!important;
+  width: 600px;
 }
 .output-photo {
   position: absolute;
@@ -482,11 +488,14 @@ h6 {
 .aboutMes {
   border-bottom: 2px solid #c8c8c8;
   padding-bottom: 20px;
+  overflow-wrap: break-word!important;
+  word-wrap: break-word!important;
+  overflow-wrap: break-word!important;
 }
 
 .experience-output-div {
   position: absolute;
-  top: 390px;
+  top: 450px;
   
 }
 .experience-output {
@@ -562,11 +571,11 @@ h6 {
   overflow-wrap: break-word;
   
 }
-.borderTOP{
+.borderTOPs{
   margin-top: 30px;
   margin-bottom: 20px;
   width: 250px;
-  border-top: 2px dotted  #c8c8c8;
+  border-top: 2px dotted  #c8c8c8!important;
 }
 
 /* VALIDATION STYLING */
