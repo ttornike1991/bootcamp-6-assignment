@@ -1,3 +1,74 @@
+const experiences = {};
+   
+// loop through localStorage to extract properties
+for (let i = 0; i < localStorage.length; i++) {
+const key = localStorage.key(i);
+if (key.startsWith("position")) {
+  const index = key.substring("position".length);
+  // create a new object for the experience if it doesn't exist yet
+  if (!experiences[index]) {
+    experiences[index] = {};
+  }
+  // add the properties to the experience object
+  experiences[index].position = localStorage.getItem(`position${index}`);
+} else if (key.startsWith("employee")) {
+  const index = key.substring("employer".length);
+  // create a new object for the experience if it doesn't exist yet
+  if (!experiences[index]) {
+    experiences[index] = {};
+  }
+  // add the properties to the experience object
+  experiences[index].employer = localStorage.getItem(`employee${index}`);
+} else if (key.startsWith("startData")) {
+  const index = key.substring("startData".length);
+  // create a new object for the experience if it doesn't exist yet
+  if (!experiences[index]) {
+    experiences[index] = {};
+  }
+  // add the properties to the experience object
+  experiences[index].start_date = localStorage.getItem(`startData${index}`);
+} else if (key.startsWith("endData")) {
+  const index = key.substring("endData".length);
+  // create a new object for the experience if it doesn't exist yet
+  if (!experiences[index]) {
+    experiences[index] = {};
+  }
+  // add the properties to the experience object
+  experiences[index].due_date = localStorage.getItem(`endData${index}`);
+} else if (key.startsWith("description")) {
+  const index = key.substring("description".length);
+  // create a new object for the experience if it doesn't exist yet
+  if (!experiences[index]) {
+    experiences[index] = {};
+  }
+  // add the properties to the experience object
+  experiences[index].description = localStorage.getItem(`description${index}`);
+}
+ 
+
+}
+
+// log the generated experiences
+console.log(experiences);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//აწდწადჯაწჰდწაჯკჰდწკაჯჰ
+
+
 const form = document.getElementById("form-personal-info");
 const formssss = document.querySelector(".experience-info");
 const form2 = document.getElementById("form-personal-info2");
@@ -883,11 +954,10 @@ if (window.location.pathname === "/personal.html") {
     console.log(localStorage.getItem("position1"), "ss");
     let getOUTER = document.querySelector(".getOUTER");
     for (let i = 0; i < localStorage.length; i++) {
-      try {
-        if (localStorage.getItem(`OnewFormHTML${i}`)) {
-          title = getOUTER.querySelector(".experience-output ");
-          title.classList.replace("hide", "visible");
-        }
+      try {if( localStorage.getItem(`OnewFormHTML${i}`)){
+        title=getOUTER.querySelector('.experience-output ')
+        title.classList.replace('hide', 'visible')
+      }
         let storedOuterHTML = localStorage.getItem(`OnewFormHTML${i}`);
 
         var div = document.createElement("myDiv");
@@ -902,116 +972,92 @@ if (window.location.pathname === "/personal.html") {
 
 // experience html
 if (window.location.pathname === "/experience.html") {
-  document.addEventListener("DOMContentLoaded", function () {
-    formDiv.addEventListener("input", function (e) {
-      const outputKeys = Object.keys(localStorage).filter((key) =>
-        key.startsWith("OnewForm")
-      );
+  formDiv.addEventListener("input", function (e) {
+    const experienceOutputDiv = document.querySelector(".experience-output-div");
 
-      outputKeys.sort();
-
-      const experienceOutputDiv = document.querySelector(".experience-output-div");
-      let formCount = localStorage.getItem("count");
-      formCount = parseInt(formCount, 10);
+    let formCount = localStorage.getItem("count");
+    formCount = parseInt(formCount);
+    const inputs = form2Container.querySelectorAll("input, textarea");
+    inputs.forEach((input, index) => {
+      const id = input.id;
+      let value = input.value;
+      let update1 = "";
+      let update2 = "";
       for (let i = 0; i <= formCount; i++) {
-        const outputKey = `OnewForm${i}`;
+        let experienceTitle = experienceOutputDiv.querySelector(`.experience-output`);
+        let justHypen = experienceOutputDiv.querySelector(`.justHypen${i}`);
 
-        if (outputKeys.includes(outputKey)) {
-          const saveOUTPUT = localStorage.getItem(outputKey);
-          if (saveOUTPUT) {
-            const getOuterElement = document.createElement("div");
-            getOuterElement.innerHTML = saveOUTPUT;
-            experienceOutputDiv.appendChild(getOuterElement);
+        let employeeOutput = experienceOutputDiv.querySelector(`.employee${i}`);
+        let positionOutput = experienceOutputDiv.querySelector(`.position${i}`);
+        let startDataOutput = experienceOutputDiv.querySelector(`.startData${i}`);
+        let endDataOutput = experienceOutputDiv.querySelector(`.endData${i}`);
+        let descriptionOutput = experienceOutputDiv.querySelector(`.description${i}`);
+        let forms = document.querySelector(`.newForm${i}`);
+        if (forms) {
+          try{ if (id === positionOutput.classList[3] && input.value) {
+            positionOutput.classList.replace("hide", "chita-chita");
+            update1 = value.substring(0, 25) + ",";
+            experienceTitle.classList.replace("hide", "chita-chita");
+            value = update1;
+          }}catch{
+            console.log('pawa avcdi');
           }
+         try{
+          if (id === employeeOutput.classList[2] && input.value) {
+            employeeOutput.classList.replace("hide", "chita-chita");
+            experienceTitle.classList.replace("hide", "chita-chita");
+
+            update1 = value.substring(0, 25);
+
+            value = update1;
+          }}catch{
+            console.log('pawa avcdi');
+          }
+          try{
+         
+            startDataOutput.classList.replace("hide", "chita-chita");
+            experienceTitle.classList.replace("hide", "chita-chita");
+            update1 = value.substring(0, 25);
+            value = update1;
+          }catch{
+            console.log('pawa avcdi');
+          }
+          try{
+           
+            endDataOutput.classList.replace("hide", "chita-chita");
+             
+              justHypen.classList.replace("hide", "chita-chita");
+           } catch (e) {
+            console.log('pawa avcdi');
+            }
+
+          
+          
+          try{
+        
+            descriptionOutput.classList.replace("hide", "chita-chita");
+            experienceTitle.classList.replace("hide", "chita-chita");
+            update2 = value.slice(0, 400);
+            value = update2;
+          }catch{
+            console.log('pawa avcdi');
+          }
+        }
+        try{
+          let OnewFormHTML = document.querySelector(`#OnewForm${i}`).outerHTML;
+        localStorage.setItem(`OnewFormHTML${i}`, OnewFormHTML);
+        }catch{
+          console.log("shevagdeb");
         }
       }
 
-      const inputs = form2Container.querySelectorAll("input, textarea");
-      inputs.forEach((input, index) => {
-        const id = input.id;
-        let value = input.value;
-        let update1 = "";
-        let update2 = "";
-        for (let i = 0; i <= formCount; i++) {
-          let experienceTitle = experienceOutputDiv.querySelector(`.experience-output`);
-          let justHypen = experienceOutputDiv.querySelector(`.justHypen${i}`);
-
-          let employeeOutput = experienceOutputDiv.querySelector(`.employee${i}`);
-          let positionOutput = experienceOutputDiv.querySelector(`.position${i}`);
-          let startDataOutput = experienceOutputDiv.querySelector(`.startData${i}`);
-          let endDataOutput = experienceOutputDiv.querySelector(`.endData${i}`);
-          let descriptionOutput = experienceOutputDiv.querySelector(`.description${i}`);
-          let forms = document.querySelector(`.newForm${i}`);
-          if (forms) {
-            console.log(id, positionOutput, i);
-            try {
-              if (id === positionOutput.classList[3] && input.value) {
-                positionOutput.classList.replace("hide", "chita-chita");
-                update1 = value.substring(0, 25) + ",";
-                experienceTitle.classList.replace("hide", "chita-chita");
-                value = update1;
-              }
-            } catch {
-              console.log("pawa avcdi");
-            }
-            try {
-              if (id === employeeOutput.classList[2] && input.value) {
-                employeeOutput.classList.replace("hide", "chita-chita");
-                experienceTitle.classList.replace("hide", "chita-chita");
-
-                update1 = value.substring(0, 25);
-
-                value = update1;
-              }
-            } catch {
-              console.log("pawa avcdi");
-            }
-            try {
-              if (id === startDataOutput.classList[2] && input.value) {
-                startDataOutput.classList.replace("hide", "chita-chita");
-                experienceTitle.classList.replace("hide", "chita-chita");
-                update1 = value.substring(0, 25);
-                value = update1;
-              }
-            } catch {
-              console.log("pawa avcdi");
-            }
-            try {
-              if (id === endDataOutput.classList[2] && input.value) {
-                endDataOutput.classList.replace("hide", "chita-chita");
-
-                justHypen.classList.replace("hide", "chita-chita");
-              }
-            } catch (e) {
-              console.log("pawa avcdi");
-            }
-
-            try {
-              if (id === descriptionOutput.classList[2] && input.value) {
-                descriptionOutput.classList.replace("hide", "chita-chita");
-                experienceTitle.classList.replace("hide", "chita-chita");
-                update2 = value.slice(0, 400);
-                value = update2;
-              }
-            } catch {
-              console.log("pawa avcdi");
-            }
-          }
-        }
-
-        const div = document.querySelector(`.${id}`);
-        if (div) {
-          div.innerHTML = value;
-        }
-        try {
-          let OnewFormHTML = document.querySelector(`#OnewForm${index}`).outerHTML;
-          localStorage.setItem(`OnewFormHTML${index}`, OnewFormHTML);
-        } catch {
-          console.log("shevagdeb");
-        }
-      });
+      const div = document.querySelector(`.${id}`);
+      if (div) {
+        div.innerHTML = value;
+      }
+    
     });
-  });
+    });
 }
 
 // ************************//
@@ -1052,3 +1098,4 @@ if (window.location.pathname === "/personal.html") {
 }
 
 //************************** */
+
