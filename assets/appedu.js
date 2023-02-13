@@ -19,15 +19,15 @@ async function getDegree2(dd) {
   try {
     const response = await fetch("https://resume.redberryinternship.ge/api/degrees");
     const data = await response.json();
-    localStorage.setItem("degrees", JSON.stringify(data));
+    localStorage.setItem("Objdegrees", JSON.stringify(data));
   } catch (error) {
     console.error(error);
   }
 }
 async function main() {
   await getDegree2();
-  if (localStorage.getItem("degrees")) {
-    local = JSON.parse(localStorage.getItem("degrees"));
+  if (localStorage.getItem("Objdegrees")) {
+    local = JSON.parse(localStorage.getItem("Objdegrees"));
 
     selectElements = document.getElementsByTagName("select");
 
@@ -185,8 +185,8 @@ document.getElementById("submitExperience").addEventListener("click", function (
 
     if (!formHasValues && i !== 0) {
       console.log("Form is empty, skipping validation.");
-
-      continue;
+      window.location = "/finishedcv.html";
+      return;
     }
 
     if (!forms[i].checkValidity()) {
@@ -194,7 +194,7 @@ document.getElementById("submitExperience").addEventListener("click", function (
     } else {
       forms[i].click();
       console.log("Form is valid, submitting...");
-      window.location.href = "/finishedcv.html";
+      window.location = "/finishedcv.html";
     }
   }
 });
@@ -338,8 +338,6 @@ for (let i = 0; i <= formCount; i++) {
   }
 }
 
-
-
 window.addEventListener("load", function () {
   const experienceOutputDiv = document.querySelector(".experience-output-div");
 
@@ -376,7 +374,7 @@ window.addEventListener("load", function () {
         if (id === degreeInput.classList[2] && localStorage.getItem(`degree${i}`)) {
           let idx = localStorage.getItem(`degree${i}`);
 
-          update1 = JSON.parse(localStorage.getItem("degrees"));
+          update1 = JSON.parse(localStorage.getItem("Objdegrees"));
 
           update1 = update1[idx].title;
           degreeInput.classList.replace("hide", "chita-chita");
@@ -489,26 +487,7 @@ window.addEventListener("load", function () {
   }
 });
 
-
-
-
-
-
-
-
 //                                                    *******  liveStrem to the right side**********
-
-
-
-
-
-
-
-
-
-
-
-
 
 document.addEventListener("DOMContentLoaded", function () {
   formDiv.addEventListener("input", function (e) {
@@ -536,7 +515,7 @@ document.addEventListener("DOMContentLoaded", function () {
           if (degreeOutput && degreeOutput.classList[2] === e.target.id) {
             let idx = e.target.value;
             // console.log(e.target.value);
-            update1 = JSON.parse(localStorage.getItem("degrees"));
+            update1 = JSON.parse(localStorage.getItem("Objdegrees"));
             valuedegree = update1[idx - 1].title;
             console.log(valuedegree);
             degreeOutput.innerText = valuedegree.toString();
@@ -564,3 +543,93 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // ************************//
+
+const formData = {
+  name: null,
+  surname: null,
+  email: null,
+  phone_number: null,
+  experiences: [],
+  educations: [],
+  image: null,
+  about_me: null,
+};
+
+for (let i = 0; i < localStorage.length; i++) {
+  const key = localStorage.key(i);
+
+  if (key === "name") {
+    formData.name = localStorage.getItem(key);
+  } else if (key === "surname") {
+    formData.surname = localStorage.getItem(key);
+  } else if (key === "email") {
+    formData.email = localStorage.getItem(key);
+  } else if (key === "phone_number") {
+    formData.phone_number = localStorage.getItem(key);
+  } else if (key === "image") {
+    formData.image = localStorage.getItem(key);
+  } else if (key === "about_me") {
+    formData.about_me = localStorage.getItem(key);
+  } else if (key.startsWith("position")) {
+    const index = key.substring("position".length);
+    formData.experiences[index] = formData.experiences[index] || {};
+    formData.experiences[index].position = localStorage.getItem(key);
+  } else if (key.startsWith("employee")) {
+    const index = key.substring("employee".length);
+    formData.experiences[index] = formData.experiences[index] || {};
+    formData.experiences[index].employer = localStorage.getItem(key);
+  } else if (key.startsWith("startData")) {
+    const index = key.substring("startData".length);
+    formData.experiences[index] = formData.experiences[index] || {};
+    formData.experiences[index].start_date = localStorage.getItem(key);
+  } else if (key.startsWith("endData")) {
+    const index = key.substring("endData".length);
+    formData.experiences[index] = formData.experiences[index] || {};
+    formData.experiences[index].due_date = localStorage.getItem(key);
+  } else if (key.startsWith("description")) {
+    const index = key.substring("description".length);
+    formData.experiences[index] = formData.experiences[index] || {};
+    formData.experiences[index].description = localStorage.getItem(key);
+  } else if (key.startsWith("degree")) {
+    const index = key.substring("degree".length);
+    formData.educations[index] = formData.educations[index] || {};
+    formData.educations[index].degree_id = localStorage.getItem(key);
+  } else if (key.startsWith("uni")) {
+    const index = key.substring("uni".length);
+    formData.educations[index] = formData.educations[index] || {};
+    formData.educations[index].institute = localStorage.getItem(key);
+  } else if (key.startsWith("EendData")) {
+    const index = key.substring("EendData".length);
+    formData.educations[index] = formData.educations[index] || {};
+    formData.educations[index].due_date = localStorage.getItem(key);
+  } else if (key.startsWith("Edescription")) {
+    const index = key.substring("Edescription".length);
+    formData.educations[index] = formData.educations[index] || {};
+    formData.educations[index].description = localStorage.getItem(key);
+  }
+}
+
+console.log(formData);
+
+// function fetchData() {
+
+//   return fetch("https://resume.redberryinternship.ge/api/cvs", {
+//     headers: {
+//       Accept: "application/json",
+//     },
+//     method: "POST",
+//     body: formData,
+//   })
+//     .then((res) => res.json())
+//     .then((data) => {
+//       console.log(data);
+//       return Promise.resolve(data);
+//     })
+//     .catch((err) => console.log(err));
+// }
+// fetchData()
+// console.log(typeof(formData),formData);
+
+//************************************************************************************************************************************************************************ */
+// ვეცადე ყველანაირად ვერ მოვასწარი ბოლომდე საკმაოდ ბევრი ტექნიკის სწავლა მომიწია კეთების პროცესში ფაქტიურად არ გავჩერებულვარ  :) იმედი მაქვს მაინც მოვხვდები ბუთქამპში   //
+//************************************************************************************************************************************************************************ */

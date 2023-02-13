@@ -170,7 +170,7 @@ if (window.location.pathname === "/personal.html") {
     fetchData().then((result) => {
       data = result;
       console.log(data, "Success");
-      window.location.href = "experience.html";
+      window.location.href = "/experience.html";
     });
   });
 }
@@ -315,8 +315,12 @@ if (window.location.pathname === "/experience.html") {
   document.getElementById("submitExperience").addEventListener("click", function (e) {
     e.preventDefault();
 
-    var forms = document.getElementsByClassName("experience-info-form");
-    for (var i = 0; i < forms.length; i++) {
+    let forms = document.getElementsByClassName("experience-info-form");
+    let formsArray = Array.from(forms);
+
+    for (var i = 0; i < formsArray.length; i++) {
+      console.log(i);
+
       var formElements = forms[i].elements;
       var formHasValues = false;
 
@@ -328,8 +332,8 @@ if (window.location.pathname === "/experience.html") {
 
       if (!formHasValues && i !== 0) {
         console.log("Form is empty, skipping validation.");
-
-        continue;
+        window.location = "/education.html";
+        return;
       }
 
       if (!forms[i].checkValidity()) {
@@ -337,7 +341,7 @@ if (window.location.pathname === "/experience.html") {
       } else {
         forms[i].click();
         console.log("Form is valid, submitting...");
-        window.location.href = "/education.html";
+        window.location = "/education.html";
       }
     }
   });
