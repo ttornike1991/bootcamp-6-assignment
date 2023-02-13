@@ -338,11 +338,34 @@ for (let i = 0; i <= formCount; i++) {
   }
 }
 
-//                           liveStrem to the right side
+
+
+
+
+
+
+
+
+
+
+//                                                    *******  liveStrem to the right side**********
+
+
+
+
+
+
+
+
+
+
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
   formDiv.addEventListener("input", function (e) {
     console.log(e.target);
-    let valuedegree;
+    let valuedegree = "";
     const newFormElements = document.querySelectorAll("[id^='EnewForm']");
 
     const experienceOutputDiv = document.querySelector(".experience-output-div");
@@ -361,16 +384,21 @@ document.addEventListener("DOMContentLoaded", function () {
           uniOutput.classList.replace("hide", "chita-chita");
           experienceTitle.classList.replace("hide", "chita-chita");
         }
-        if (degreeOutput && degreeOutput.classList[2] === e.target.id) {
-          let idx = e.target.value;
-          // console.log(e.target.value);
-          update1 = JSON.parse(localStorage.getItem("degrees"));
-          valuedegree = update1[idx - 1].title;
-          console.log(valuedegree);
-          degreeOutput.innerHTML = valuedegree.toString();
-          degreeOutput.classList.replace("hide", "chita-chita");
-          experienceTitle.classList.replace("hide", "chita-chita");
+        try {
+          if (degreeOutput && degreeOutput.classList[2] === e.target.id) {
+            let idx = e.target.value;
+            // console.log(e.target.value);
+            update1 = JSON.parse(localStorage.getItem("degrees"));
+            valuedegree = update1[idx - 1].title;
+            console.log(valuedegree);
+            degreeOutput.innerText = valuedegree.toString();
+            degreeOutput.classList.replace("hide", "chita-chita");
+            experienceTitle.classList.replace("hide", "chita-chita");
+          }
+        } catch (e) {
+          console.log(e);
         }
+
         if (endDataOutput && endDataOutput.classList[2] === e.target.id) {
           endDataOutput.classList.replace("hide", "chita-chita");
           experienceTitle.classList.replace("hide", "chita-chita");
