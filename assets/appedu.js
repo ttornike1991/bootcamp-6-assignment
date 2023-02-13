@@ -340,6 +340,154 @@ for (let i = 0; i <= formCount; i++) {
 
 
 
+window.addEventListener("load", function () {
+  const experienceOutputDiv = document.querySelector(".experience-output-div");
+
+  const inputs = form2Container.querySelectorAll("input, textarea, select");
+
+  inputs.forEach((input, index) => {
+    const id = input.id;
+    let value;
+    let update1 = "";
+    let update2 = "";
+    let i;
+    for (i = 0; i <= inputs.length; i++) {
+      let experienceTitle = experienceOutputDiv.querySelector(`.experience-output`);
+      let experienceTitleclassList = experienceTitle ? experienceTitle.classList : [];
+
+      let uniInput = experienceOutputDiv.querySelector(`.uni${i}`);
+      let degreeInput = experienceOutputDiv.querySelector(`.degree${i}`);
+
+      let endDataInput = experienceOutputDiv.querySelector(`.EendData${i}`);
+      let eDescriptionInput = experienceOutputDiv.querySelector(`.Edescription${i}`);
+      try {
+        if (id === uniInput.classList[3] && localStorage.getItem(`uni${i}`)) {
+          const uniInputValue = localStorage.getItem(`uni${i}`);
+          uniInput.classList.replace("hide", "chita-chita");
+          experienceTitle.classList.replace("hide", "chita-chita");
+          update1 = uniInputValue.substring(0, 25) + ",";
+
+          value = update1;
+        }
+      } catch (e) {
+        // console.log(e, "Gadaamowme LOADEVENTi");
+      }
+      try {
+        if (id === degreeInput.classList[2] && localStorage.getItem(`degree${i}`)) {
+          let idx = localStorage.getItem(`degree${i}`);
+
+          update1 = JSON.parse(localStorage.getItem("degrees"));
+
+          update1 = update1[idx].title;
+          degreeInput.classList.replace("hide", "chita-chita");
+          degreeInput.classList.replace("hide", "chita-chita");
+          value = update1;
+        }
+      } catch (e) {
+        // console.log(e, "Gadaamowme LOADEVENTi");
+      }
+      try {
+        if (id === endDataInput.classList[2] && localStorage.getItem(`EendData${i}`)) {
+          const endDataInputValue = localStorage.getItem(`EendData${i}`);
+
+          endDataInput.classList.replace("hide", "chita-chita");
+
+          experienceTitleclassList.replace("hide", "chita-chita");
+
+          update1 = endDataInputValue.substring(0, 25);
+          value = update1;
+        }
+      } catch (e) {
+        // console.log(e, "Gadaamowme LOADEVENTi");
+      }
+      try {
+        if (
+          id === eDescriptionInput.classList[2] &&
+          localStorage.getItem(`Edescription${i}`)
+        ) {
+          const eDescriptionInputValue = localStorage.getItem(`Edescription${i}`);
+          eDescriptionInput.classList.replace("hide", "chita-chita");
+          experienceTitleclassList.replace("hide", "chita-chita");
+          experienceTitleclassList.replace("hide", "chita-chita");
+
+          update2 = eDescriptionInputValue.slice(0, 400);
+          value = update2;
+        }
+      } catch (e) {
+        // console.log(e, "Gadaamowme LOADEVENTi");
+      }
+    }
+
+    const htmlElement = document.querySelector(`.${id}`);
+
+    if (htmlElement) {
+      htmlElement.innerHTML = value;
+    }
+  });
+
+  inputs.forEach((input) => {
+    const id = input.id;
+    Object.entries(localStorage).forEach(([key, value]) => {
+      if (key === id) {
+        input.value = value;
+      }
+    });
+  });
+  uName = localStorage.getItem("name");
+  if (uName) {
+    document.querySelector(".fName").classList.remove("hide");
+    const updatedValue = uName.slice(0, 9);
+    document.querySelector(".fName").innerText = updatedValue;
+  }
+
+  lastName = localStorage.getItem("surname");
+  if (lastName) {
+    document.querySelector(".lastName").classList.remove("hide");
+    const updatedValue = lastName.slice(0, 16);
+    document.querySelector(".lastName").innerText = updatedValue;
+  }
+
+  aboutMe = localStorage.getItem("about_me");
+  if (aboutMe) {
+    document.querySelector(".aboutMes").classList.remove("hide");
+    document.querySelector(".aboutMe").classList.remove("hide");
+    document.querySelector(".aboutMes").innerText = aboutMe;
+  }
+  let imageData = localStorage.getItem("image");
+  if (imageData) {
+    let blob = dataURLtoBlob(imageData);
+
+    imagePreview.src = imageData;
+  }
+
+  function dataURLtoBlob(dataURL) {
+    let parts = dataURL.split(",");
+    let contentType = parts[0].split(":")[1].split(";")[0];
+    let raw = window.atob(parts[1]);
+    let rawLength = raw.length;
+    let uInt8Array = new Uint8Array(rawLength);
+
+    for (let i = 0; i < rawLength; ++i) {
+      uInt8Array[i] = raw.charCodeAt(i);
+    }
+
+    return new Blob([uInt8Array], { type: contentType });
+  }
+
+  email = localStorage.getItem("email");
+  if (email) {
+    document.querySelector(".mail").classList.remove("hide");
+    document.querySelector(".mail").innerText = email;
+    document.getElementsByClassName(".mail").value = email;
+  }
+
+  phone = localStorage.getItem("phone_number");
+  if (phone) {
+    document.querySelector(".phone").classList.remove("hide");
+    document.querySelector(".phone").innerText = phone;
+    document.getElementsByClassName(".phone").value = phone;
+  }
+});
 
 
 
