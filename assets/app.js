@@ -328,6 +328,7 @@ if (window.location.pathname === "/experience.html") {
 
       if (!formHasValues && i !== 0) {
         console.log("Form is empty, skipping validation.");
+
         continue;
       }
 
@@ -336,6 +337,7 @@ if (window.location.pathname === "/experience.html") {
       } else {
         forms[i].click();
         console.log("Form is valid, submitting...");
+        window.location.href = "/education.html";
       }
     }
   });
@@ -735,17 +737,6 @@ if (window.location.pathname === "/experience.html") {
       console.log(key + ": " + value, "sasa");
     }
 
-    // const container = document.getElementById("getOUTER");
-    // for (let i = 0; i < localStorage.length; i++) {
-    //   const key = localStorage.key(i);
-    //   if (key.startsWith("OnewForm")) {
-    //     const divElement = localStorage.getItem(key);
-    //     const tempDiv = document.createElement("div");
-    //     tempDiv.innerHTML = divElement;
-
-    //     container.appendChild(tempDiv);
-    //   }
-    // }
     fetchData();
   });
 }

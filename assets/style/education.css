@@ -29,6 +29,9 @@ html {
   font-family: "Helvetica Neue";
   src: url("/assets/fonts/HelveticaNeue.ttc") format("truetype");
 }
+.marginTop {
+  margin-top: 12px !important;
+}
 body {
   position: relative;
   background: #f9f9f9;
@@ -66,7 +69,11 @@ body {
 .h6-single-element {
   width: 30px !important;
 }
-
+.placehodler{
+  color : rgba(0, 0, 0, 0.6);
+  font-size: 16px;
+  font-family: 'Helvetica Neue';
+}
 .head-line > * {
   font-family: "Helvetica Neue";
   font-style: normal;
@@ -127,7 +134,8 @@ label {
 .endDataDiv {
   width: 47%;
 }
-#endData{}
+#endData {
+}
 .name-div > *:first-child {
   margin-bottom: 8px;
   height: 21px;
@@ -195,10 +203,9 @@ label {
   width: 339px;
   border-radius: nullpx;
 }
-.displayBlock{
+.displayBlock {
   display: block;
 }
-
 
 .paddingRight {
   padding-right: 20px;
@@ -325,7 +332,7 @@ h6 {
   color: #2e2e2e;
   margin-top: 8px;
 }
-.absolutePosition{
+.absolutePosition {
   position: absolute;
   z-index: -1;
 }
@@ -353,7 +360,7 @@ h6 {
   cursor: pointer;
 }
 .submitDivExperience a {
-  padding: 14px 35px;
+  padding: 14px 25px;
   gap: 20px;
   width: 151px;
   height: 48px;
@@ -458,6 +465,9 @@ h6 {
   line-height: 22px;
   text-transform: lowercase;
   color: #000000;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  width: 600px;
 }
 .output-photo {
   position: absolute;
@@ -482,12 +492,14 @@ h6 {
 .aboutMes {
   border-bottom: 2px solid #c8c8c8;
   padding-bottom: 20px;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
 }
 
 .experience-output-div {
   position: absolute;
-  top: 390px;
-  
+  top: 450px;
 }
 .experience-output {
   width: 143px;
@@ -556,8 +568,16 @@ h6 {
   line-height: 22px;
 
   color: #000000;
-  width: 600px;
+  width: 400px;
   margin-top: 14px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+.borderTOPs {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  width: 250px;
+  border-top: 2px dotted #c8c8c8 !important;
 }
 
 /* VALIDATION STYLING */

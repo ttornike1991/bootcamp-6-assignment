@@ -1,0 +1,199 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Helvetica Neue";
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("/assets/fonts/HelveticaNeue.ttc") format("truetype");
+}
+body {
+  background-color: #ffffff;
+  margin-bottom: 129px;
+}
+.redcros {
+  position: absolute;
+  bottom: 44px;
+  left: 78px;
+}
+
+.container {
+  top: 54px;
+
+  padding-top: 54px;
+  margin: auto;
+  height: 1080px;
+  width: 822px;
+  border-radius: 0px;
+  background: #ffffff;
+  border: 0.8px solid #000000;
+}
+.banner p {
+  line-height: 42px;
+  margin: auto;
+  width: 364px;
+  height: 86px;
+  font-size: 28px;
+  color: #1a1a1a;
+  font-weight: 600;
+  padding: 40px 32px;
+  overflow-wrap: break-word;
+  text-align: start;
+  vertical-align: middle;
+}
+.banner {
+  position: absolute;
+  top: 57px;
+  right: 70px;
+  width: 427px;
+  height: 167px;
+  border-radius: 8px;
+  border: 1px solid #e4e4e4;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.19), 0px 6px 6px rgba(0, 0, 0, 0.23);
+}
+.banner img {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+
+  font-size: 12px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+section {
+  padding: 68px 80px 0px 80px;
+}
+.output-photo {
+  position: absolute;
+  top: 2px;
+  right: 25px;
+}
+.output-photo img {
+  margin-top: 48px;
+  margin-right: 15px;
+
+  width: 246px;
+  height: 246px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.displayFlex {
+  display: flex;
+}
+.spaceBetween {
+  justify-content: space-between;
+}
+.width-25 {
+  width: 42%;
+}
+
+.mailphone li {
+  font-family: "Helvetica Neue";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  color: #1a1a1a;
+}
+.fulnameFont {
+  font-family: "Helvetica Neue";
+  font-weight: bold;
+  font-size: 34px;
+  line-height: 100%;
+  color: #f93b1d;
+  padding-bottom: 17px;
+}
+
+.mailphone {
+  list-style: none;
+  padding: 17px 0px;
+}
+.mailphone > li:first-child::before {
+  vertical-align: middle;
+  padding-right: 10px;
+  content: url(/assets/images/material-symbols_alternate-email.png);
+  padding-bottom: 0px;
+  background-size: cover;
+}
+.mailphone > li:nth-child(2)::before {
+  vertical-align: middle;
+  padding-right: 10px;
+  content: url(/assets/images/Group.png);
+  padding-bottom: 0px;
+  background-size: cover;
+}
+.second-line {
+  padding-top: 16px;
+  padding-bottom: 14px;
+  width: 500px;
+}
+.second-line h2 {
+  color: #f93b1d;
+  padding-bottom: 16px;
+}
+.second-line p {
+  padding-bottom: 16px;
+}
+.line {
+  border-bottom: 1px solid #c8c8c8;
+  width: 662px;
+}
+.third-line {
+  padding-top: 20px;
+  width: 500px;
+}
+.third-line h2 {
+  color: #f93b1d;
+  padding-bottom: 8px;
+}
+.third-line h6 {
+  padding: 8px 0px;
+  padding-bottom: 16px;
+}
+.relative {
+  position: relative;
+}
+.data-time h6 {
+  color: #909090;
+  line-height: 100%;
+  font-style: italic;
+  font-size: 16px;
+}
+.forth-line {
+  padding-top: 20px;
+  width: 500px;
+}
+.education {
+  color: #f93b1d;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 100%;
+}
+.uni {
+  font-style: normal;
+  color: #1a1a1a;
+  font-weight: bold;
+  font-size: 16px;
+}
+.degree {
+  color: 1A1A1A;
+  font-size: 16px;
+
+  font-style: normal;
+}
+.padding16 {
+  padding: 16px 0px;
+}
+.endData {
+  color: #909090;
+  font-size: 16px;
+  font-weight: bold;
+  font-style: italic;
+}

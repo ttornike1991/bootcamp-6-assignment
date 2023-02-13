@@ -5,114 +5,122 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/assets/style/education.css" />
-    <title>პირადი</title>
+    <title>გამოცდილება</title>
   </head>
   <body>
     <div class="displayFlex left-container">
       <div>
         <a href="./index.html">
-          <img class="leftward-arrow" src="./assets/images/Group 4.png" alt="leftward-arrow" />
+          <img
+            class="leftward-arrow"
+            src="./assets/images/Group 4.png"
+            alt="leftward-arrow"
+          />
         </a>
       </div>
-      <div class="left-side">
-        <section class="header">
-          <div class="head-line displayFlex">
-            <h2>ᲞᲘᲠᲐᲓᲘ ᲘᲜᲤᲝ</h2>
-            <h6 class="h6-single-element">1/3</h6>
-          </div>
-        </section>
-        <section class="personal-info">
-          <form action="" class="personal-info-form" id="form-personal-info">
-            <div class="displayFlex spaceBetween width-100">
-              <div class="displayFlex flexColumn name-div relative">
-                <label for="fName">სახელი</label>
-                <input class="inputStayling" type="text" id="fName" placeholder="ანზორ" required />
-                <h6>მინიმუმ 2 ასო, ქართული ასოები</h6>
-                <span class="invalid hide"></span>
-              </div>
-              <div class="displayFlex flexColumn lastname-div relative">
-                <label for="lastName">გვარი</label>
-                <input
-                  class="inputStayling"
-                  type="text"
-                  id="lastName"
-                  placeholder="მუმლაძე"
-                  required
-                />
-                <h6>მინიმუმ 2 ასო, ქართული ასოები</h6>
-                <span class="invalid hide"></span>
-              </div>
+      <div class="for-duplication">
+        <div class="left-side">
+          <section class="header">
+            <div class="head-line displayFlex">
+              <h2>განათლება</h2>
+              <h6 class="h6-single-element">3/3</h6>
             </div>
-            <div class="displayFlex photoDiv relative">
-              <label class="photoLabel">პირადი ფოტოს ატვირთვა</label>
-              <button id="file-input-button" class="buttonUpload">ატვირთვა</button>
-              <input
-                type="file"
-                id="uploadButton"
-                accept="image/png, image/jpg,image/jpeg"
-                multiple
-                required
-              />
-              <span class="invalid hide"></span>
+          </section>
+          <section class="experience-info" id="experience-info">
+            <div class="form-container" id="form-container">
+              <form
+                action=""
+                class="experience-info-form EdunewForm0"
+                id="form-personal-info2"
+              >
+                <div class="displayFlex flexColumn position-div relative marginBottom">
+                  <label for="uni0">სასწავლებელ</label>
+                  <input
+                    class="inputStayling position-class"
+                    type="text"
+                    id="uni0"
+                    placeholder="სასწავლებელი"
+                    required
+                  />
+                  <h6>მინიმუმ 2 სიმბოლო</h6>
+                  <span class="invalid hide"></span>
+                </div>
+                <div class="displayFlex spaceBetween width-100 dataField">
+                  <div class="displayFlex flexColumn name-div relative">
+                    <label for="degree0">ხარისხი</label>
+                    <select
+                      id="degree0"
+                      name="cars"
+                      class="inputStayling paddingRight "
+                      placeholder="აირჩიეთ ხარისხი"
+                      required
+                    >
+                      <option value="0"   disapbled   selected>
+                        აირჩიეთ ხარისხი
+                      </option>
+                    </select>
+                    <h6></h6>
+                    <span class="invalid hide"></span>
+                  </div>
+                  <div class="displayFlex flexColumn endDataDiv relative">
+                    <label for="EendData0">დამთავრების რიცხვი</label>
+                    <input
+                      class="inputStayling paddingRight"
+                      type="date"
+                      id="EendData0"
+                      name="trip-start"
+                      required
+                    />
+                    <h6></h6>
+                    <span class="invalid hide"></span>
+                  </div>
+                </div>
+                <div class="displayFlex descriptionDiv flexColumn relative">
+                  <label class="aboutMeLabel" for="Edescription0">აღწერა</label>
+                  <textarea
+                    class="inputStayling descriptionClass "
+                    id="Edescription0"
+                    placeholder="განათლების აღწერა აღწერა"
+                    required
+                  ></textarea>
+                  <span class="invalid hide"></span>
+                </div>
+
+                <div class="add-form-div">
+                  <a class="add-form" id="add-form0">სხვა სასწავლებლის დამატება</a>
+                </div>
+                <button
+                  id="submit0"
+                  class="absolutePosition hiddenButton"
+                  type="submit"
+                ></button>
+              </form>
             </div>
-            <div class="displayFlex aboutMeDiv flexColumn">
-              <label class="aboutMeLabel" for="aboutMe">ჩემ შესახებ (არასავალდებულო)</label>
-              <textarea
-                class="inputStayling"
-                id="aboutMe"
-                placeholder="ზოგადი ინფო შენ შესახებ"
-              ></textarea>
+            <div class="submitDivExperience displayFlex">
+              <a href="/experience.html" id="back">უკან</a>
+              <a href="/education.html" id="submitExperience">დასრულება</a>
             </div>
-            <div class="displayFlex flexColumn mailDiv relative">
-              <label for="mail">ელ.ფოსტა</label>
-              <input
-                class="inputStayling mail-class"
-                type="email"
-                id="mail"
-                placeholder="anzorr666@redberry.ge"
-                required
-              />
-              <h6>უნდა მთავრდებოდეს @redberry.ge-ით</h6>
-              <span class="invalid hide"></span>
-            </div>
-            <div class="displayFlex flexColumn phoneDiv relative">
-              <label for="phone">მობილურის ნომერი</label>
-              <input
-                class="inputStayling"
-                type="text"
-                id="phone"
-                placeholder="+995551123456"
-                required
-              />
-              <h6>უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს</h6>
-              <span class="invalid hide"></span>
-            </div>
-            <div class="submitDiv displayFlex">
-              <button id="submit" type="submit">შემდეგი</button>
-            </div>
-          </form>
-        </section>
+          </section>
+        </div>
       </div>
     </div>
     <div class="displayFlex right-container relative">
       <div class="ouput-info">
         <div class="displayFlex">
-          <h1 class="hide fName">  &nbsp</h1>
-          <h1 class="hide  lastName"> &nbsp</h1>
+          <h1 class="hide fName">&nbsp</h1>
+          <h1 class="hide lastName">&nbsp</h1>
         </div>
 
         <ul>
-          <li class="hide mail"> </li>
-          <li class="hide phone"> </li>
+          <li class="hide mail"></li>
+          <li class="hide phone"></li>
         </ul>
-        <h4 class="hide aboutMe">ჩემ შესახებ </h4>
-        <p class="hide aboutMes">
-             
-        </p>
+        <h4 class="hide aboutMe">ჩემ შესახებ</h4>
+        <p class="hide aboutMes"></p>
       </div>
-      <div class="output-photo  ">
+      <div class="output-photo">
         <img
-          class="uploadButton  "
+          class="uploadButton"
           id="imagePreview"
           src="/assets/images/F9F9F9.png"
           alt="profile-photo"
@@ -121,7 +129,20 @@
       <div class="end-star">
         <img src="./assets/images/LOGO-12 1.png" alt="" />
       </div>
+      <div class="experience-output-div" id="getOUTER">
+        <h2 class="hide experience-output marginBottom">გამოცდილება</h2>
+        <div id="EnewForm0">
+          <div class="displayFlex marginTop">
+            <h4 class="hide position-output marginBottom8px uni0" name="uni0"></h4>
+            <h4 class="hide employee-output degree0" name="employee0"></h4>
+          </div>
+          <div class="displayFlex data-output">
+            <h5 class="hide endData-output EendData0"></h5>
+          </div>
+          <div class="hide description-output Edescription0"></div>
+        </div>
+      </div>
     </div>
-    <script src="./assets/app.js"></script>
+    <script src="/assets/appedu.js"></script>
   </body>
 </html>
