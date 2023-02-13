@@ -24,8 +24,27 @@ async function getDegree2(dd) {
     console.error(error);
   }
 }
-getDegree2();
+async function main() {
+  await getDegree2();
+  if (localStorage.getItem("degrees")) {
+    local = JSON.parse(localStorage.getItem("degrees"));
 
+    selectElements = document.getElementsByTagName("select");
+
+    for (let i of selectElements) {
+      var dropdown = document.querySelector(`#${i.id}`);
+
+      for (let j in local) {
+        var option = document.createElement("option");
+
+        dropdown.appendChild(option);
+        option.value = local[j].id;
+        option.text = local[j].title;
+      }
+    }
+  }
+}
+main();
 //                          VALIDATIONS   //
 
 //*****************//
@@ -50,6 +69,7 @@ formssss.addEventListener("click", function (e) {
 
     if (e.target.classList.contains("add-form")) {
       (function () {
+        let newForm = document.createElement("div");
         newForm.innerHTML = `<form
     action=""
     class="experience-info-form EdunewForm${formCount}"
@@ -119,9 +139,10 @@ formssss.addEventListener("click", function (e) {
       <h4 class="hide position-output marginBottom8px uni${formCount}" name="xxxx">
         
       </h4>
-      <h4 class="hide employee-output degree"  ></h4>
+      <h4 class="hide employee-output degree${formCount}"  ></h4>
     </div>
-    <div class="displayFlex data-output${formCount}">
+    <div class="displayFlex data-output ">
+    
       <h5 class="hide endData-output EendData${formCount}" name="xxxx"> </h5>
     </div>
     <div class="hide description-output Edescription${formCount}" name="xxxx">
@@ -279,23 +300,21 @@ form2Container.addEventListener("change", function (e) {
   }
 });
 
-// Relload Handler
-
-let newForm = document.createElement("div");
+//                                                              *********** Relload Handler ****************
 
 // hendel  added forms
 
 const formContainer = document.getElementById("form-container");
-const getOuter = document.getElementById("getOUTER");
+const getOuter = document.querySelector("#getOUTER");
 
 const formKeys = Object.keys(localStorage).filter((key) => key.startsWith("EdunewForm"));
 const outputKeys = Object.keys(localStorage).filter((key) => key.startsWith("EnewForm"));
 
 formKeys.sort();
 outputKeys.sort();
-
+console.log(formKeys, outputKeys);
 let formCount = localStorage.getItem("count2");
-formCount = parseInt(formCount, 10);
+formCount = parseInt(formCount);
 
 for (let i = 0; i <= formCount; i++) {
   const formKey = `EdunewForm${i}`;
@@ -318,273 +337,53 @@ for (let i = 0; i <= formCount; i++) {
     }
   }
 }
-document.addEventListener("DOMContentLoaded", function () {
-  if (localStorage.getItem("degrees")) {
-    local = JSON.parse(localStorage.getItem("degrees"));
-
-    selectElements = document.getElementsByTagName("select");
-
-    for (let i of selectElements) {
-      var dropdown = document.querySelector(`#${i.id}`);
-
-      for (let j in local) {
-        var option = document.createElement("option");
-
-        dropdown.appendChild(option);
-        option.value = local[j].id;
-        option.text = local[j].title;
-      }
-    }
-  }
-  window.addEventListener("load", function () {
-    const experienceOutputDiv = document.querySelector(".experience-output-div");
-
-    const inputs = form2Container.querySelectorAll("input, textarea, select");
-
-    inputs.forEach((input, index) => {
-      const id = input.id;
-      let value;
-      let update1 = "";
-      let update2 = "";
-      let i;
-      for (i = 0; i <= inputs.length; i++) {
-        let experienceTitle = experienceOutputDiv.querySelector(`.experience-output`);
-        let experienceTitleclassList = experienceTitle ? experienceTitle.classList : [];
-
-        let uniInput = experienceOutputDiv.querySelector(`.uni${i}`);
-        let degreeInput = experienceOutputDiv.querySelector(`.degree${i}`);
-
-        let endDataInput = experienceOutputDiv.querySelector(`.EendData${i}`);
-        let eDescriptionInput = experienceOutputDiv.querySelector(`.Edescription${i}`);
-        try {
-          if (id === uniInput.classList[3] && localStorage.getItem(`uni${i}`)) {
-            const uniInputValue = localStorage.getItem(`uni${i}`);
-            uniInput.classList.replace("hide", "chita-chita");
-            experienceTitle.classList.replace("hide", "chita-chita");
-            update1 = uniInputValue.substring(0, 25) + ",";
-
-            value = update1;
-          }
-        } catch (e) {
-          // console.log(e, "Gadaamowme LOADEVENTi");
-        }
-        try {
-          if (id === degreeInput.classList[2] && localStorage.getItem(`degree${i}`)) {
-            let idx = localStorage.getItem(`degree${i}`);
-
-            update1 = JSON.parse(localStorage.getItem("degrees"));
-
-            update1 = update1[idx].title;
-            degreeInput.classList.replace("hide", "chita-chita");
-            degreeInput.classList.replace("hide", "chita-chita");
-            value = update1;
-          }
-        } catch (e) {
-          // console.log(e, "Gadaamowme LOADEVENTi");
-        }
-        try {
-          if (id === endDataInput.classList[2] && localStorage.getItem(`EendData${i}`)) {
-            const endDataInputValue = localStorage.getItem(`EendData${i}`);
-
-            endDataInput.classList.replace("hide", "chita-chita");
-
-            experienceTitleclassList.replace("hide", "chita-chita");
-
-            update1 = endDataInputValue.substring(0, 25);
-            value = update1;
-          }
-        } catch (e) {
-          // console.log(e, "Gadaamowme LOADEVENTi");
-        }
-        try {
-          if (
-            id === eDescriptionInput.classList[2] &&
-            localStorage.getItem(`Edescription${i}`)
-          ) {
-            const eDescriptionInputValue = localStorage.getItem(`Edescription${i}`);
-            eDescriptionInput.classList.replace("hide", "chita-chita");
-            experienceTitleclassList.replace("hide", "chita-chita");
-            experienceTitleclassList.replace("hide", "chita-chita");
-
-            update2 = eDescriptionInputValue.slice(0, 400);
-            value = update2;
-          }
-        } catch (e) {
-          // console.log(e, "Gadaamowme LOADEVENTi");
-        }
-      }
-
-      const htmlElement = document.querySelector(`.${id}`);
-
-      if (htmlElement) {
-        htmlElement.innerHTML = value;
-      }
-    });
-
-    inputs.forEach((input) => {
-      const id = input.id;
-      Object.entries(localStorage).forEach(([key, value]) => {
-        if (key === id) {
-          input.value = value;
-        }
-      });
-    });
-    uName = localStorage.getItem("name");
-    if (uName) {
-      document.querySelector(".fName").classList.remove("hide");
-      const updatedValue = uName.slice(0, 9);
-      document.querySelector(".fName").innerText = updatedValue;
-    }
-
-    lastName = localStorage.getItem("surname");
-    if (lastName) {
-      document.querySelector(".lastName").classList.remove("hide");
-      const updatedValue = lastName.slice(0, 16);
-      document.querySelector(".lastName").innerText = updatedValue;
-    }
-
-    aboutMe = localStorage.getItem("about_me");
-    if (aboutMe) {
-      document.querySelector(".aboutMes").classList.remove("hide");
-      document.querySelector(".aboutMe").classList.remove("hide");
-      document.querySelector(".aboutMes").innerText = aboutMe;
-    }
-    let imageData = localStorage.getItem("image");
-    if (imageData) {
-      let blob = dataURLtoBlob(imageData);
-
-      imagePreview.src = imageData;
-    }
-
-    function dataURLtoBlob(dataURL) {
-      let parts = dataURL.split(",");
-      let contentType = parts[0].split(":")[1].split(";")[0];
-      let raw = window.atob(parts[1]);
-      let rawLength = raw.length;
-      let uInt8Array = new Uint8Array(rawLength);
-
-      for (let i = 0; i < rawLength; ++i) {
-        uInt8Array[i] = raw.charCodeAt(i);
-      }
-
-      return new Blob([uInt8Array], { type: contentType });
-    }
-
-    email = localStorage.getItem("email");
-    if (email) {
-      document.querySelector(".mail").classList.remove("hide");
-      document.querySelector(".mail").innerText = email;
-      document.getElementsByClassName(".mail").value = email;
-    }
-
-    phone = localStorage.getItem("phone_number");
-    if (phone) {
-      document.querySelector(".phone").classList.remove("hide");
-      document.querySelector(".phone").innerText = phone;
-      document.getElementsByClassName(".phone").value = phone;
-    }
-  });
-});
 
 //                           liveStrem to the right side
+document.addEventListener("DOMContentLoaded", function () {
+  formDiv.addEventListener("input", function (e) {
+    console.log(e.target);
+    let valuedegree;
+    const newFormElements = document.querySelectorAll("[id^='EnewForm']");
 
-formDiv.addEventListener("input", function (e) {
-  const outputKeys = Object.keys(localStorage).filter((key) =>
-    key.startsWith("EnewForm")
-  );
-
-  outputKeys.sort();
-
-  const experienceOutputDiv = document.querySelector(".experience-output-div");
-  let formCount = localStorage.getItem("count2");
-  formCount = parseInt(formCount);
-  for (let i = 0; i <= formCount; i++) {
-    const outputKey = `EnewForm${i}`;
-
-    if (outputKeys.includes(outputKey)) {
-      const saveOUTPUT = localStorage.getItem(outputKey);
-      if (saveOUTPUT) {
-        const getOuterElement = document.createElement("div");
-        getOuterElement.innerHTML = saveOUTPUT;
-        experienceOutputDiv.appendChild(getOuterElement);
-      }
-    }
-  }
-
-  const inputs = form2Container.querySelectorAll("input, textarea, select");
-
-  inputs.forEach((input, index) => {
-    const id = input.id;
-    let value = input.value;
-    let update1 = "";
-
-    for (let i = 0; i < formCount; i++) {
-      let experienceTitle = experienceOutputDiv.querySelector(`.experience-output`);
-      let positionOutput = experienceOutputDiv.querySelector(`.uni${i}`);
-      let degreeOutput = experienceOutputDiv.querySelector(`.degree${i}`);
-      console.log(positionOutput, degreeOutput);
-      let endDataOutput = experienceOutputDiv.querySelector(`.EendData${i}`);
-      let EdescriptionOutput = experienceOutputDiv.querySelector(`.Edescription${i}`);
-      try {
-        if (id === positionOutput.classList[3] && input.value) {
-          console.log(index, "ss");
-          positionOutput.classList.replace("hide", "chita-chita");
-          update1 = value.substring(0, 25) + ",";
+    const experienceOutputDiv = document.querySelector(".experience-output-div");
+    const inputs = form2Container.querySelectorAll("input, textarea, select");
+    const experienceTitle = experienceOutputDiv.querySelector(`.experience-output`);
+    console.log("sssawwwwwwww", "dddddddddddddddddddddddddddddddddddddd", e.target.id);
+    inputs.forEach((item, index) => {
+      for (let i = 0; i < inputs.length; i++) {
+        let uniOutput = document.querySelector(`.${e.target.id}`);
+        let degreeOutput = document.querySelector(`.${e.target.id}`);
+        let endDataOutput = document.querySelector(`.${e.target.id}`);
+        let descriptionOutput = document.querySelector(`.${e.target.id}`);
+        // console.log(degreeOutput);
+        if (uniOutput && uniOutput.classList[3] === e.target.id) {
+          uniOutput.innerText = e.target.value;
+          uniOutput.classList.replace("hide", "chita-chita");
           experienceTitle.classList.replace("hide", "chita-chita");
-
-          value = update1;
         }
-      } catch {
-        // console.log("pawa avcdi");
-      }
-
-      try {
-        if (id === degreeOutput.classList[2]) {
-          console.log("shevedi", id);
-          let idx = input.value;
-          console.log(idx);
+        if (degreeOutput && degreeOutput.classList[2] === e.target.id) {
+          let idx = e.target.value;
+          // console.log(e.target.value);
           update1 = JSON.parse(localStorage.getItem("degrees"));
-
-          update1 = update1[idx].title;
+          valuedegree = update1[idx - 1].title;
+          console.log(valuedegree);
+          degreeOutput.innerHTML = valuedegree.toString();
           degreeOutput.classList.replace("hide", "chita-chita");
           experienceTitle.classList.replace("hide", "chita-chita");
-
-          value = update1;
         }
-      } catch {
-        // console.log("pawa avcdi");
-      }
-      try {
-        if (id === endDataOutput.classList[2] && input.value) {
-          update1 = value.substring(0, 25);
-          value = update1;
+        if (endDataOutput && endDataOutput.classList[2] === e.target.id) {
           endDataOutput.classList.replace("hide", "chita-chita");
-        }
-      } catch (e) {
-        // console.log("pawa avcdi");
-      }
-
-      try {
-        if (id === EdescriptionOutput.classList[2] && input.value) {
-          console.log("shevedi");
-          EdescriptionOutput.classList.replace("hide", "chita-chita");
           experienceTitle.classList.replace("hide", "chita-chita");
-          update1 = value.slice(0, 400);
-          value = update1;
+          endDataOutput = e.target.value;
         }
-      } catch {
-        // console.log("pawa avcdi");
+        if (descriptionOutput && descriptionOutput.classList[2] === e.target.id) {
+          descriptionOutput.classList.replace("hide", "chita-chita");
+          experienceTitle.classList.replace("hide", "chita-chita");
+
+          descriptionOutput.innerText = e.target.value;
+        }
       }
-    }
-    let outputElement = document.querySelector(`.${id}`);
-    if (outputElement) {
-      outputElement.innerHTML = value;
-      // console.log(outputElement);
-    }
-    try {
-      let OnewFormHTML = document.querySelector(`#EnewForm${index}`).outerHTML;
-      localStorage.setItem(`OnewFormHTML${index}`, OnewFormHTML);
-    } catch {}
+    });
   });
 });
 
